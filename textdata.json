@@ -1,39 +1,39 @@
 {
   "tutorial": {
     "step1": {
-      "title": "게임 족보 안내",
-      "content": "<table class='tut-table'><tr><th>족보 (Hand)</th><th>조합 수</th><th>확률 (%)</th></tr><tr><td>원페어 (One Pair)</td><td>10,560</td><td>51.89%</td></tr><tr><td>투페어 (Two Pair)</td><td>4,680</td><td>23.00%</td></tr><tr><td>트리플 (Triple)</td><td>2,240</td><td>11.01%</td></tr><tr class='tut-row-highlight'><td>7 하이 (7-High)</td><td>1,280</td><td>6.29%</td></tr><tr><td>스트레이트 (Straight)</td><td>1,020</td><td>5.01%</td></tr><tr><td>풀하우스 (Full House)</td><td>480</td><td>2.36%</td></tr><tr><td>포카드 (Four Card)</td><td>85</td><td>0.42%</td></tr><tr><td>스트레이트 플러시</td><td>4</td><td>0.02%</td></tr><tr style='font-weight:bold; color:#fff;'><td>합계</td><td>20,349</td><td>100%</td></tr></table>SEVEN HI 포커는 특수한 트럼프덱을 사용합니다. <br><span class='gold-text'>A~5까지의 4가지 무늬(♠♥♦♣)카드 20장, 무늬가 없는 7카드 한장</span>을 사용합니다.<br> 위의 테이블은 이 포커에서의 각 족보별 등장 확률입니다. <br><p style='font-size:2.0vh; color:#ffd700;'>※ 7-Hi: 족보가 없을 때 7을 보유하면 발동하며, 원페어를 제외한 모든 상위 족보를 이깁니다.</p>"
+      "title": "<span class='gold-text'>게임 족보 안내</span>",
+      "content": "<table class='tut-table'><tr><th>족보 (Hand)</th><th>조합 수</th><th>확률 (%)</th></tr><tr><td>원페어 (One Pair)</td><td>10,560</td><td>51.89%</td></tr><tr><td>투페어 (Two Pair)</td><td>4,680</td><td>23.00%</td></tr><tr><td>트리플 (Triple)</td><td>2,240</td><td>11.01%</td></tr><tr class='tut-row-highlight'><td>7 하이 (7-High)</td><td>1,280</td><td>6.29%</td></tr><tr><td>스트레이트 (Straight)</td><td>1,020</td><td>5.01%</td></tr><tr><td>풀하우스 (Full House)</td><td>480</td><td>2.36%</td></tr><tr><td>포카드 (Four Card)</td><td>85</td><td>0.42%</td></tr><tr><td>스트레이트 플러시</td><td>4</td><td>0.02%</td></tr><tr style='font-weight:bold; color:#fff;'><td>합계</td><td>20,349</td><td>100%</td></tr></table>SEVEN HI 포커는 특수한 트럼프덱을 사용합니다. <br><span class='gold-text'>A~5까지의 4가지 무늬(♠♥♦♣)카드 20장, 무늬가 없는 7카드 한장</span>을 사용합니다.<br> 위의 테이블은 이 포커에서의 각 족보별 등장 확률입니다. <br><p style='font-size:2.0vh; color:#ffd700;'>※ Seven-Hi: 족보가 없을 때 7을 보유하면 발동하며, <br>원페어를 제외한 모든 상위 족보를 이깁니다.</p>"
     },
     "step2": { 
-      "title": "게임 목표", 
+      "title": "<span class='gold-text'>게임 목표</span>", 
       "content": "7라운드 동안 최대한 많은 점수를 획득하면 승리합니다.<br>게임은 <span class='gold-text'>DEAL→REVEAL→FOLD/SHOWDOWN 페이즈</span>로 구성되어있고 <br>각 페이즈별로 안내드리겠습니다." 
     },
     "step3": { 
-      "title": "DEAL 안내", 
+      "title": "<span class='gold-text'>DEAL 안내</span>", 
       "content": "DEAL 버튼을 누르면 5장의 카드를 받습니다. <br>확인을 누르고 DEAL을 직접 눌러보세요." 
     },
     "step5": { 
-      "title": "카드 확인", 
+      "title": "<span class='gold-text'>카드 확인</span>", 
       "content": "5장의 카드 중 <span class='gold-text'>상대에게 보여줄 4장</span>을 선택하는 페이즈입니다. <br>숨겨놓을 1장에 자신이 어떤 생각을 하는지 들키지 않도록 고르세요!" 
     },
     "step6": { 
-      "title": "REVEAL 안내", 
+      "title": "<span class='gold-text'>REVEAL 안내</span>", 
       "content": "신중하게 고민해서 공개할 4장을 선택하고 REVEAL을 누르세요." 
     },
     "step8": { 
-      "title": "승부 선택", 
+      "title": "<span class='gold-text'>승부 선택</span>", 
       "content": "다른 사람들의 카드를 보고 승부에 참여하려면 SHOWDOWN, <br>나의 패로는 승부에서 이기기 어렵다고 생각되면 FOLD를 누르세요." 
     },
     "step9": { 
-      "title": "SHOWDOWN 안내", 
+      "title": "<span class='gold-text'>SHOWDOWN 안내</span>", 
       "content": "라운드에서 쇼다운하여 승리하면 <span class='gold-text'>쇼다운에 참여한 인원+2점</span>을 획득합니다.<br> 폴드를 하면 결과에 관계없이 <span class='gold-text'>+1점</span>을 얻습니다. <br><span class='gold-text'>공개되지 않은 카드의 목록은 우측</span>에 있습니다. <br>상대의 패를 고려하여 가장 합리적인 선택을 하세요." 
     },
     "step11": { 
-      "title": "Seven-Hi 규칙", 
+      "title": "<span class='gold-text'>Seven-Hi 규칙</span>", 
       "content": "Seven-Hi는 원페어를 제외한 모든 상위 패를 이길 수 있는 강력한 수단입니다.<br>누군가 Seven-Hi를 들고 있지는 않을지 꼼꼼하게 따져보세요" 
     },
     "step12": { 
-      "title": "완료", 
+      "title": "<span class='gold-text'>완료</span>", 
       "content": "기초 교육이 끝났습니다. 행운을 빕니다! <br>확인을 누르고 본격적인 게임에 들어가세요." 
     }
   },
