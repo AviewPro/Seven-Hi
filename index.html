@@ -2,262 +2,20 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>SEVEN HI</title>
     <link rel="icon" type="image/png" href="7.png">
-    <style>
-        :root {
-            --neon-cyan: #0ff; --neon-green: #3f3; --neon-pink: #f0f;
-            --dark-bg: #050505; --card-bg: #fff;
-            --gold-gradient: linear-gradient(145deg, #ffd700, #ffae00, #bf953f, #fcf6ba, #b38728);
-            --red-gradient: linear-gradient(145deg, #ff0000, #cc0000, #990000);
-        }
-        body { 
-            background: url('Casinotable.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #eee; font-family: 'Pretendard', sans-serif; 
-            margin: 0; display: flex; justify-content: center; align-items: center; 
-            height: 100vh; width: 100vw; overflow: hidden; padding: 1vh; box-sizing: border-box;
-        }
-
-        #main-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('Seven Hi.gif') no-repeat center center;
-            background-size: cover;
-            z-index: 1000; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; padding-top: 20vh;
-        }
-        .main-btn-group { display: flex; flex-direction: column; gap: 3vh; width: 40vw; max-width: 600px; }
-        
-        .btn-main {
-            padding: 4vh; font-weight: 900;
-            border: 0.4vh solid #bf953f; border-radius: 2vh; cursor: pointer;
-            text-shadow: 0.2vh 0.2vh 0.5vh rgba(0,0,0,0.8); transition: all 0.2s;
-            white-space: nowrap; overflow: hidden;
-            box-shadow: 0 0 2vh rgba(255, 0, 0, 0.4), inset 0 0 1.5vh rgba(255, 215, 0, 0.3);
-            color: #fff;
-        }
-        .gold-text {
-            font-weight: bold; 
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-            display: inline-block;
-        }
-        #btn-start { background: var(--red-gradient); font-size: 5vh; border-color: #ffd700; }
-        #btn-tutorial { background: var(--gold-gradient); color: #000; font-size: 4vh; border-color: #990000; }
-        .btn-main:hover { transform: scale(1.05); filter: brightness(1.2); }
-        
-        #side-container {
-            width: 25vw; max-width: 400px; margin-right: 2vh;
-            height: 80vh; display: flex; flex-direction: column;
-            margin-top: -2vh; 
-        }
-
-        .score-title {
-            font-size: 2.5vh; font-weight: 900; background: var(--gold-gradient);
-            color: #000; height: 6vh; display: flex; align-items: center; justify-content: center;
-            border-radius: 1vh; border: 0.3vh solid #5d4037; margin-bottom: 1.5vh;
-            text-transform: uppercase; letter-spacing: 0.2vh; box-shadow: 0 0 1.5vh rgba(255, 215, 0, 0.4);
-        }
-
-        #side-score { display: flex; flex-direction: column; gap: 1vh; flex-grow: 1; }
-
-        .score-player-unit {
-            flex: 1; display: flex; flex-direction: column; justify-content: center;
-            background: rgba(0,0,0,0.85); border: 0.25vh solid transparent; 
-            border-radius: 1.5vh; padding: 1vh 2vh; box-sizing: border-box;
-        }
-        .score-player-unit.my-score { border-color: #fff; box-shadow: 0 0 1vh rgba(255,255,255,0.3); }
-
-        .p-top-info { 
-            display: flex; justify-content: space-between; align-items: baseline;
-            border-bottom: 0.15vh solid rgba(0,255,255,0.3); margin-bottom: 0.5vh;
-        }
-        .p-name-label { font-size: 2vh; color: #fff; font-weight: bold; }
-        .p-total-label { font-size: 6vh; font-weight: 900; line-height: 1; }
-        .total-winner { color: #ff3333; text-shadow: 0 0 1.5vh rgba(255, 0, 0, 0.8); }
-        .total-normal { color: #fff; }
-
-        .p-mini-table { width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; }
-        .p-mini-table th { color: #fff; border: 0.1vh solid #555; padding: 0.2vh; font-size: 1.4vh; width: 14.28%; }
-        .p-mini-table td { color: #ffd700; border: 0.1vh solid #555; height: 3vh; font-weight: bold; font-size: 1.8vh; }
-
-        .game-board {
-            width: fit-content; min-width: calc(fit-content * 1.05); 
-            max-width: 90vw; background: url('tablecloth.png'); background-size: cover;
-            padding: 2vh 3vh; border-radius: 3vh; border: 0.5vh solid #5d4037; position: relative;
-            height: 95vh; display: flex; flex-direction: column; justify-content: flex-start;
-            box-shadow: inset 0 0 5vh #000; box-sizing: border-box; align-items: center; 
-        }
-
-        .static-gold-box { 
-            font-size: 3vh; font-weight: 900; background: var(--gold-gradient);
-            color: #000; height: 6vh; width: 100%; display: flex; align-items: center; justify-content: center;
-            border-radius: 1vh; text-align: center;
-            box-shadow: 0 0 2vh rgba(255, 215, 0, 0.6); border: 0.3vh solid #5d4037;
-            text-transform: uppercase; letter-spacing: 0.3vh; margin-bottom: 1vh;
-            box-sizing: border-box;
-        }
-
-        #round-info { font-size: 2.5vh; color: #fff; text-shadow: 0 0 1vh var(--neon-cyan); font-weight: 900; text-align: center; margin-bottom: 1.5vh; }
-
-        .game-msg { 
-            font-size: 2.2vh; font-weight: 900; color: #ffd700;
-            background: rgba(0,0,0,0.8); width: 100%; text-align: center;
-            padding: 1.5vh 0; border-radius: 0.8vh; margin-bottom: 1.5vh;
-            border-top: 0.3vh solid #bf953f; border-bottom: 0.3vh solid #bf953f;
-            box-sizing: border-box; text-shadow: 0 0 0.8vh rgba(255,215,0,0.5);
-        }
-
-        .player-zone {
-            flex: 1; background: rgba(255,255,255,0.05);
-            padding: 0 2.5vh; border-radius: 2vh; display: flex; align-items: center; gap: 2vh;
-            border: 0.2vh solid rgba(255,255,255,0.1); box-sizing: border-box; margin-bottom: 1.2vh;
-            width: fit-content;
-        }
-        #zone-human { border-color: #fff !important; box-shadow: 0 0 2vh rgba(255,255,255,0.2); }
-
-        .p-meta { width: 18vh; flex-shrink: 0; text-align: center; }
-        .p-result { font-size: 2.2vh; font-weight: 900; height: 1.2em; transition: color 0.3s; }
-        .p-fold-rank { font-size: 1.4vh; color: #888; margin-top: 0.3vh; }
-
-        .txt-win { color: #ff3333; text-shadow: 0 0 1vh rgba(255, 0, 0, 0.7); }   
-        .txt-lose { color: #000000; text-shadow: 0 0 0.5vh #fff; } 
-        .txt-fold { color: #888888; }   
-
-        .cards-row { display: flex; gap: 1.5vh; flex-grow: 1; height: 100%; align-items: center; width: fit-content; }
-        .footer-ui { margin-top: auto; display: flex; flex-direction: column; align-items: center; width: 100%; }
-        
-        .action-btn-group { display: flex; gap: 2vh; justify-content: center; width: 100%; }
-        .action-btn-group button {
-            width: 18vh; height: 7vh;
-            background: #27ae60; color: white; border: none;
-            font-size: 2.2vh; font-weight: bold; cursor: pointer; border-radius: 1.2vh;
-            transition: transform 0.1s; display: flex; align-items: center; justify-content: center;
-        }
-        .action-btn-group button:active { transform: scale(0.95); }
-        .action-btn-group button.fold-btn { background: #c0392b; }
-        .action-btn-group button:disabled { background: #7f8c8d; cursor: not-allowed; transform: none; }
-
-        .card, .mini-card {
-            height: 100%; aspect-ratio: 5/7;
-            background: var(--card-bg); color: #000; border-radius: 1vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            font-weight: bold; border: 0.1vh solid #ccc; 
-            border-right: 0.6vh solid #000; border-bottom: 0.6vh solid #000;
-            transition: all 0.3s; cursor: pointer; user-select: none; flex-shrink: 0;
-            width: auto; box-sizing: border-box;
-        }
-
-        .human-deal-anim { animation: dealFromDeck 0.52s cubic-bezier(0.25, 1, 0.5, 1) forwards; opacity: 0; }
-        @keyframes dealFromDeck { 0% { transform: translate(60vw, -20vh) rotate(45deg); opacity: 0; } 100% { transform: translate(0, 0) rotate(0); opacity: 1; } }
-
-        .card.hidden { 
-            background: #2c3e50 !important; background-image: repeating-conic-gradient(#34495e 0% 25%, #2c3e50 0% 50%) !important;
-            background-size: 2vh 2vh !important; border: 0.3vh solid #1a252f; color: transparent !important;
-            border-right: 0.6vh solid #000; border-bottom: 0.6vh solid #000; box-shadow: inset 0 0 1.5vh rgba(0,0,0,0.5);
-        }
-        
-        .mini-card { height: 11vh; width: calc(11vh * (5/7)); }
-        .mini-card.empty { background: rgba(255,255,255,0.1); border: 0.2vh dashed #444; color: transparent; }
-        .mini-card.locked { background: #555 !important; border: 0.2vh solid #333; border-right: 0.6vh solid #000; border-bottom: 0.6vh solid #000; color: transparent !important; }
-        
-        .card.folded-filter { opacity: 0.3; filter: grayscale(0.8); }
-        .card.red, .mini-card.red { color: #d63031; }
-        .card.black, .mini-card.black { color: #2d3436; }
-        .card.special, .mini-card.special { background: #ffeaa7; border-color: #f39c12; }
-        .card.selected { border-color: var(--neon-green); transform: translateY(-1.5vh); }
-        .card.revealed-border { border-color: var(--neon-cyan); }
-        
-        #tutorial-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.6); z-index: 5000; flex-direction: column; 
-            align-items: center; justify-content: center; pointer-events: auto;
-        }
-        .tutorial-msg-box {
-            background: #1a1a1a; border: 0.3vh solid #666; padding: 2vh 3vh; 
-            border-radius: 2vh; width: 85vh; text-align: center; 
-            box-shadow: 0 0 2vh rgba(0,0,0,0.8); position: relative; pointer-events: auto;
-        }
-        
-        .tut-table {
-            width: 90%; margin: 2vh auto; border-collapse: collapse; color: #eee; font-size: 1.6vh;
-        }
-        .tut-table th, .tut-table td {
-            border: 0.1vh solid #444; padding: 0.8vh; text-align: center;
-        }
-        .tut-table th { background: #333; color: #ffd700; }
-        .tut-row-highlight {
-            background: rgba(255, 215, 0, 0.2) !important;
-            color: #ffd700 !important;
-            font-weight: bold;
-            box-shadow: inset 0 0 1vh rgba(255, 215, 0, 0.3);
-        }
-
-        .tutorial-highlight { outline: 0.5vh solid #ff4b2b !important; box-shadow: 0 0 5vh #ff4b2b !important; opacity: 1 !important; pointer-events: auto !important; z-index: 6000 !important; position: relative; }
-        .tutorial-active-lock { pointer-events: none !important; }
-        .tutorial-active-lock #tutorial-overlay, .tutorial-active-lock #tutorial-overlay *, .tutorial-active-lock .tutorial-highlight { pointer-events: auto !important; }
-
-        .card .suit, .mini-card .suit { font-size: 2.8vh; line-height: 1; }
-        .card .val, .mini-card .val { font-size: 3.5vh; font-weight: 900; line-height: 1; }
-        .push-right { margin-left: auto; }
-
-        #game-over-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 2000; display: none;
-            flex-direction: column; justify-content: center; align-items: center;
-        }
-        .final-board {
-            background: rgba(30,30,30,0.9); border: 0.6vh solid #bf953f; border-radius: 4vh;
-            padding: 5vh; width: 85vh; text-align: center; box-shadow: 0 0 6vh rgba(255, 215, 0, 0.3);
-        }
-        .final-winner { font-size: 6vh; font-weight: 900; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4vh; }
-        #final-score-container { display: flex; flex-direction: column; gap: 1.5vh; margin-bottom: 2vh; }
-
-        #deck-info {
-            width: 15vh; margin-left: 2vh; background: rgba(0,0,0,0.7);
-            border: 0.2vh solid #444; padding: 1.5vh; border-radius: 1.5vh; text-align: center;
-            height: 70vh; display: flex; flex-direction: column; opacity: 0.8; box-sizing: border-box;
-            align-self: center; justify-content: center;
-        }
-        .remaining-container { display: flex; flex-direction: column; gap: 0.8vh; align-items: center; margin-top: 1.5vh; overflow-y: auto; flex-grow: 1; width: 100%; justify-content: center; }
-
-        #sound-controls { position: fixed; bottom: 3vh; right: 3vh; z-index: 3000; display: flex; flex-direction: column; align-items: flex-end; gap: 1.5vh; }
-        #sound-panel { background: rgba(0,0,0,0.9); border: 0.3vh solid #bf953f; border-radius: 2vh; padding: 2vh; display: none; flex-direction: column; gap: 1.5vh; min-width: 16vh; }
-        .sound-row { display: flex; flex-direction: column; gap: 0.8vh; }
-        .sound-row label { font-size: 1.6vh; color: #ffd700; font-weight: bold; }
-        .sound-row input { cursor: pointer; accent-color: #ffd700; width: 100%; height: 1vh; }
-        #btn-sound-toggle { width: 6vh; height: 6vh; border-radius: 50%; background: var(--gold-gradient); border: 0.3vh solid #5d4037; cursor: pointer; font-size: 3vh; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 1.5vh rgba(255,215,0,0.5); }
-        
-        /* Winning Streak Style */
-        .streak-label { font-size: 1.4vh; font-weight: bold; margin-top: 0.5vh; }
-        .streak-white { color: #ffffff; }
-        .streak-red { color: #ff4b2b; text-shadow: 0 0 0.5vh rgba(255,0,0,0.5); }
-        .streak-gold { background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 900; }
-        #congratulation-msg { 
-            position: fixed; top: 10%; left: 0; width: 100%; text-align: center; 
-            font-size: 12vh; font-weight: 900; background: var(--gold-gradient); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            z-index: 3000; display: none; pointer-events: none;
-            text-shadow: 0 0 3vh rgba(255, 215, 0, 0.5);
-            animation: bounce 1s infinite alternate;
-        }
-        @keyframes bounce { from { transform: scale(1); } to { transform: scale(1.1); } }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="idle">
-
-    <div id="congratulation-msg">Congratulation!</div>
-
     <div id="main-screen">
         <div class="main-btn-group">
             <button id="btn-start" class="btn-main" onclick="_0x4a1b(); _0x7f2e.startGame()">START</button>
             <button id="btn-tutorial" class="btn-main" onclick="_0x4a1b(); _0x1b2c()">TUTORIAL</button>
         </div>
     </div>
-
     <div id="tutorial-overlay">
         <div class="tutorial-msg-box">
             <h3 id="tut-title" style="color: #ccc; font-size: 2.8vh; margin-bottom: 1.5vh;"></h3>
@@ -266,7 +24,6 @@
             <div id="tut-esc-guide" style="font-size: 1.4vh; color: #888; margin-top: 2vh;">ESC를 누르면 언제든지 메인화면으로 돌아갑니다.</div>
         </div>
     </div>
-
     <div id="game-over-overlay">
         <div class="final-board">
             <div id="final-winner-text" class="final-winner">WINNER: YOU</div>
@@ -277,7 +34,6 @@
             </div>
         </div>
     </div>
-
     <div id="sound-controls">
         <div id="sound-panel">
             <div class="sound-row"><label>BGM</label><input type="range" min="0" max="1" step="0.01" value="0.06" id="vol-bgm" oninput="_0x8c9d('bgm', this.value)"></div>
@@ -285,17 +41,14 @@
         </div>
         <button id="btn-sound-toggle" onclick="_0x2b3c()">⚙️</button>
     </div>
-
-    <audio id="bgm" src="casinojazz.mp3" loop></audio>
-    <audio id="sfx-click" src="delt1.mp3"></audio>
-    <audio id="sfx-btn" src="Click.mp3"></audio>
-    <audio id="sfx-delt4" src="delt4.mp3"></audio>
-
+    <audio id="bgm" src="casinojazz.mp3" loop preload="auto"></audio>
+    <audio id="sfx-click" src="delt1.mp3" preload="auto"></audio>
+    <audio id="sfx-btn" src="Click.mp3" preload="auto"></audio>
+    <audio id="sfx-delt4" src="delt4.mp3" preload="auto"></audio>
     <div id="side-container">
         <div class="score-title">SCORE BOARD</div>
         <div id="side-score"></div>
     </div>
-
     <div class="game-board">
         <div class="static-gold-box">WELCOME TO SEVEN Hi</div>
         <div id="round-info">ROUND 1 / 7</div>
@@ -313,129 +66,10 @@
             </div>
         </div>
     </div>
-
     <div id="deck-info">
         <div class="guide-h" style="font-size:1.4vh; font-weight:bold; color:#ffd700;">UNREVEALED</div>
         <div id="remaining-cards" class="remaining-container"></div>
     </div>
-
-<script>
-    (function(){
-        const _0x5f2a = ['7','A','5','4','3','2'];
-        const _0x12e3 = {'7':6,'A':5,'5':4,'4':3,'3':2,'2':1};
-        const _0x4c11 = {'♠':4,'♥':3,'♦':2,'♣':1,'N':0};
-        const _0x3b2a = ['♠','♥','♣','♦'];
-        let _0x9d2e = null;
-        let _streak = 0; // 연승 카운터
-
-        const _0x2a1c = fetch('textdata.json').then(r=>r.json()).then(d=>{_0x9d2e=d;document.getElementById('msg-box').innerText=_0x9d2e.gameMsg.ready;return d;}).catch(e=>console.error(e));
-
-        window._0x4a1b = function(){const s=document.getElementById('sfx-delt4');s.volume=1.0;s.currentTime=0;s.play().catch(e=>{});};
-        window._0x8c9d = function(t,v){if(t==='bgm')document.getElementById('bgm').volume=v;if(t==='sfx')_0x7f2e.sfxVol=v;};
-        window._0x2b3c = function(){const p=document.getElementById('sound-panel');p.style.display=p.style.display==='flex'?'none':'flex';};
-
-        let _0x6b2d = false; let _0x8f1e = 0;
-        window._0x1b2c = async function(){if(!_0x9d2e)await _0x2a1c;_0x6b2d=true;_0x8f1e=1;document.getElementById('main-screen').style.display='none';document.body.classList.add('tutorial-active-lock');window.addEventListener('keydown',_0x3e4f);_0x5c6d();};
-        function _0x3e4f(e){if(e.key==='Escape'){_0x6b2d=false;location.reload();}}
-        function _0x5c6d(){if(!_0x9d2e)return;const t=document.getElementById('tut-title'),d=document.getElementById('tut-desc'),o=document.getElementById('tutorial-overlay');document.querySelectorAll('.tutorial-highlight').forEach(el=>el.classList.remove('tutorial-highlight'));const s=_0x9d2e.tutorial['step'+_0x8f1e];if(s){t.innerText=s.title;d.innerHTML=s.content;o.style.display='flex';}else{o.style.display='none';if(_0x8f1e===4)document.getElementById('btn-deal').classList.add('tutorial-highlight');if(_0x8f1e===7){document.getElementById('zone-human').classList.add('tutorial-highlight');document.getElementById('btn-reveal').classList.add('tutorial-highlight');}if(_0x8f1e===10){document.getElementById('btn-showdown').classList.add('tutorial-highlight');document.getElementById('btn-fold').classList.add('tutorial-highlight');}}}
-        window._0x9d8e = function(){const b=document.getElementById('sfx-btn');b.volume=_0x7f2e.sfxVol;b.currentTime=0;b.play().catch(e=>{});_0x8f1e++;if(_0x8f1e>12){_0x6b2d=false;location.reload();return;}_0x5c6d();};
-
-        window._0x7f2e = {
-            round:1, players:['ai1','ai2','ai3','human'], names:{ai1:'Paldo',ai2:'Fisher',ai3:'Kitty',human:'YOU'},
-            scores:{ai1:0,ai2:0,ai3:0,human:0}, logs:{ai1:Array(7).fill(''),ai2:Array(7).fill(''),ai3:Array(7).fill(''),human:Array(7).fill('')},
-            hands:{ai1:[],ai2:[],ai3:[],human:[]}, revIdx:{ai1:[],ai2:[],ai3:[],human:[]}, folded:{ai1:false,ai2:false,ai3:false,human:false},
-            selected:[], deck:[], phase:'idle', sfxVol:0.4,
-
-            handleBtnClick(a){
-                const s=document.getElementById('sfx-btn');s.volume=this.sfxVol;s.currentTime=0;s.play().catch(e=>{});
-                if(a==='deal'){this.dl();if(_0x6b2d&&_0x8f1e===4){_0x8f1e=5;_0x5c6d();}}
-                if(a==='reveal'){this.toFp();if(_0x6b2d&&_0x8f1e===7){_0x8f1e=8;_0x5c6d();}}
-                if(a==='fold'||a==='showdown'){if(a==='fold')this.hmF();else this.exS();if(_0x6b2d&&_0x8f1e===10){_0x8f1e=11;_0x5c6d();}}
-            },
-            startGame(){document.getElementById('main-screen').style.display='none';this.handleBtnClick('deal');},
-            resetForNewGame(){document.getElementById('game-over-overlay').style.display='none';document.getElementById('congratulation-msg').style.display='none';this.round=1;this.scores={ai1:0,ai2:0,ai3:0,human:0};this.logs={ai1:Array(7).fill(''),ai2:Array(7).fill(''),ai3:Array(7).fill(''),human:Array(7).fill('')};this.dl();},
-            dl(){
-                const b=document.getElementById('bgm');if(b.paused){b.volume=0.06;b.play().catch(e=>{});}
-                if(this.round>7)return;this.phase='reveal';this.selected=[];this.folded={ai1:false,ai2:false,ai3:false,human:false};
-                this.players.forEach(p=>{document.getElementById('zone-'+p).classList.remove('folded');document.getElementById('fold-rank-'+p).innerText="";const r=document.getElementById('res-'+p);r.className='p-result';r.innerText="";});
-                let d=[];_0x5f2a.slice(1).forEach(v=>_0x3b2a.forEach(s=>d.push({v,s,is7:false})));d.push({v:'7',s:'N',is7:true});d.sort(()=>Math.random()-0.5);
-                this.players.forEach((p,i)=>{this.hands[p]=d.slice(i*5,(i+1)*5);if(p.startsWith('ai'))this.aiDR(p);});
-                this.deck=d.slice(20);document.getElementById('btn-deal').disabled=true;document.getElementById('msg-box').innerText=_0x9d2e?_0x9d2e.gameMsg.selectReveal:"";
-                this.rn(true);this.upU();this.shU();
-            },
-            aiDR(p){
-                const h=this.hands[p],vC={};h.forEach((c,i)=>{vC[c.v]=vC[c.v]||[];vC[c.v].push(i);});let hi=-1;
-                const pV=Object.keys(vC).find(v=>vC[v].length===2);if(pV){hi=vC[pV][0];this.revIdx[p]=[0,1,2,3,4].filter(i=>i!==hi);return;}
-                const sI=h.findIndex(c=>c.is7);if(sI!==-1){hi=sI;this.revIdx[p]=[0,1,2,3,4].filter(i=>i!==hi);return;}
-                const fV=Object.keys(vC).find(v=>vC[v].length===4);if(fV){hi=vC[fV][0];this.revIdx[p]=[0,1,2,3,4].filter(i=>i!==hi);return;}
-                hi=Math.floor(Math.random()*5);this.revIdx[p]=[0,1,2,3,4].filter(i=>i!==hi);
-            },
-            aiPF(){
-                this.players.slice(0,3).forEach(p=>{
-                    if(this.folded[p])return;const mH=this.hands[p],mE=this.ev(mH);let sY=false,pl=[...this.deck];
-                    this.players.forEach(po=>{if(po===p)return;this.hands[po].forEach((c,idx)=>{if(!this.revIdx[po].includes(idx))pl.push(c);});});
-                    let sc=[];const pt=(a,m=[])=>{if(sc.length>=24)return;if(a.length===0)sc.push(m);else{for(let i=0;i<a.length;i++){let c=a.slice(),n=c.splice(i,1);pt(c,m.concat(n));if(sc.length>=24)return;}}};pt(pl);
-                    if(mE.rank===10){const afs=this.players.some(po=>{if(po===p)return false;const vc=this.revIdx[po].map(idx=>this.hands[po][idx]);return this.ev(vc).rank>=1;});if(afs)sY=true;if(!sY){let ssc=0;sc.forEach(s=>{let si=0,hss=false;this.players.forEach(po=>{if(po===p)return;const sm=this.revIdx[po].map(idx=>this.hands[po][idx]);sm.push(s[si++]);if(this.ev(sm).rank>=1)hss=true;});if(hss)ssc++;});if(ssc>=18)sY=true;}if(!sY&&Math.random()<0.5)sY=true;}
-                    else{let wc=0;sc.forEach(s=>{let si=0;const be=[];this.players.forEach(pc=>{if(pc===p)be.push({p:pc,ev:mE});else{const fh=this.revIdx[pc].map(idx=>this.hands[pc][idx]);fh.push(s[si++]);be.push({p:pc,ev:this.ev(fh)});}});const ws=this.jdR(be,be.map(b=>b.p));if(ws.includes(p))wc++;});if(wc>=9)sY=true;}
-                    if(!sY)this.f(p,1);
-                });
-            },
-            jdR(pd,ak){const rm={};pd.forEach(d=>rm[d.p]=d.ev);return this.jd(rm,ak);},
-            toFp(){this.phase='fold';this.revIdx.human=[...this.selected];this.selected=[];document.getElementById('btn-reveal').disabled=true;document.getElementById('btn-fold').disabled=false;document.getElementById('btn-showdown').disabled=false;document.getElementById('msg-box').innerText=_0x9d2e?_0x9d2e.gameMsg.chooseAction:"";this.rn();this.shU();},
-            hmF(){this.aiPF();this.f('human',1);this.exS(true);},
-            f(p,s){if(!this.folded[p]){this.folded[p]=true;this.scores[p]+=s;this.logs[p][this.round-1]=s;const e=this.ev(this.hands[p]);document.getElementById('fold-rank-'+p).innerText=`(${e.name})`;const r=document.getElementById('res-'+p);r.className='p-result txt-fold';r.innerText="FOLD (+1)";}},
-            shU(){const e=document.getElementById('remaining-cards');if(!e)return;e.innerHTML="";if(this.phase==='reveal'||this.phase==='idle'){for(let i=0;i<4;i++){const d=document.createElement('div');d.className="mini-card locked";e.appendChild(d);}return;}let ur=[];if(this.phase==='result')ur=[...this.deck];else{ur=[...this.deck];this.players.slice(0,3).forEach(p=>{this.hands[p].forEach((c,i)=>{if(!this.revIdx[p].includes(i))ur.push(c);});});}ur.sort((a,b)=>this.cC(a,b)).forEach(c=>{const d=document.createElement('div');d.className=`mini-card ${c.is7?'special':(c.s==='♥'||c.s==='♦'?'red':'black')}`;d.innerHTML=`<div class="suit">${c.s==='N'?'★':c.s}</div><div class="val">${c.v}</div>`;e.appendChild(d);});},
-            exS(ihf=false){this.phase='result';if(!ihf)this.aiPF();document.getElementById('btn-fold').disabled=true;document.getElementById('btn-showdown').disabled=true;const ak=this.players.filter(p=>!this.folded[p]);if(ak.length>0){const rs={};this.players.forEach(p=>rs[p]=this.ev(this.hands[p]));const ws=this.jd(rs,ak);this.players.forEach(p=>{if(!this.folded[p]){const r=document.getElementById('res-'+p);r.innerText=rs[p].name;r.className=ws.includes(p)?"p-result txt-win":"p-result txt-lose";}});ws.forEach(w=>{let s=ak.length+2+(rs[w].rank===10?1:0);this.scores[w]+=s;this.logs[w][this.round-1]=s;});ak.forEach(p=>{if(!ws.includes(p))this.logs[p][this.round-1]=0;});}this.rn();this.upU();this.shU();if(this.round>=7)setTimeout(()=>this.shFR(),2000);else{this.round++;document.getElementById('btn-deal').disabled=false;}},
-            shFR(){
-                const o=document.getElementById('game-over-overlay'),w=document.getElementById('final-winner-text'),s=document.getElementById('final-score-container'),ms=Math.max(...Object.values(this.scores)),ws=this.players.filter(p=>this.scores[p]===ms);
-                
-                // 플레이어 승패 판정 및 연승 카운트
-                if(ws.includes('human')) {
-                    _streak++;
-                    if(_streak === 7) document.getElementById('congratulation-msg').style.display = 'block';
-                } else {
-                    _streak = 0;
-                }
-
-                w.innerText=ws.length>1?`DRAW: ${ws.map(p=>this.names[p]).join(' & ')}`:`WINNER: ${this.names[ws[0]]}`;
-                s.innerHTML=this.players.map(p=>{const l=this.logs[p].map(x=>`<td>${x}</td>`).join(""),mc=(p==='human')?'my-score':'',sc=(this.scores[p]===ms)?'total-winner':'total-normal';
-                
-                // 플레이어(YOU) 일 때만 스트릭 표시
-                let streakHtml = "";
-                if(p === 'human') {
-                    let streakColor = "streak-white";
-                    if(_streak >= 3) streakColor = "streak-red";
-                    if(_streak >= 6) streakColor = "streak-gold";
-                    streakHtml = `<div class="streak-label ${streakColor}">Winning Streak: ${_streak}</div>`;
-                }
-
-                return `<div class="score-player-unit ${mc}" style="flex:none; margin-bottom:1vh; padding:1.5vh;"><div class="p-top-info"><span class="p-name-label">${this.names[p]} ${streakHtml}</span><span class="p-total-label ${sc}">${this.scores[p]}</span></div><table class="p-mini-table"><tr><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th><th>R7</th></tr><tr>${l}</tr></table></div>`;}).join("");o.style.display='flex';
-            },
-            ev(c){
-                let v={},h7=false,sd=[...c].sort((a,b)=>this.cC(a,b));c.forEach(x=>{v[x.v]=(v[x.v]||0)+1;if(x.is7)h7=true;});let ct=Object.entries(v).sort((a,b)=>b[1]-a[1]||_0x12e3[b[0]]-_0x12e3[a[0]]);let r={rank:0,name:"HIGH CARD",s_a:sd.map(x=>_0x12e3[x.v]),h7,cards:sd};
-                if(ct[0][1]===4)r={rank:6,name:"FOUR CARD",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};else if(Object.keys(v).length===5&&c.length===5&&(_0x12e3[sd[0].v]-_0x12e3[sd[4].v]===4)&&!h7)r={rank:4,name:"STRAIGHT",s_a:[_0x12e3[sd[0].v]],h7,cards:sd};else if(ct[0][1]===3&&ct[1]&&ct[1][1]===2)r={rank:3,name:"FULL HOUSE",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};else if(ct[0][1]===3)r={rank:2,name:"TRIPLE",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};else if(ct[0][1]===2&&ct[1]&&ct[1][1]===2)r={rank:1,name:"TWO PAIR",s_a:[_0x12e3[ct[0][0]],_0x12e3[ct[1][0]]],h7,cards:sd};else if(ct[0][1]===2)r={rank:0.5,name:"ONE PAIR",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};
-                if(r.rank===0&&h7&&c.length===5)return {rank:10,name:"7-HIGH",s_a:sd.map(x=>_0x12e3[x.v]),h7:true,cards:sd};return r;
-            },
-            jd(r,ak){
-                const h7h=ak.some(k=>r[k].rank===10),hop=ak.some(k=>r[k].rank===0.5);if(h7h&&hop){const opk=ak.filter(k=>r[k].rank===0.5);let w=opk[0];for(let i=1;i<opk.length;i++){if(this.cpN(r[opk[i]],r[w])>0)w=opk[i];}return opk.filter(k=>this.cpN(r[k],r[w])===0);}
-                const ws=[];ak.forEach(p=>{let w=true;ak.forEach(o=>{if(p!==o&&this.cp(r[p],r[o],ak.map(k=>r[k]))<0)w=false;});if(w)ws.push(p);});return ws;
-            },
-            cp(r1,r2,ar){const h7o=ar.some(r=>r&&r.rank===10);if(h7o){if(r1.rank===10){if(r2.rank===0.5)return-1;if(r2.rank===10)return 0;return 1;}if(r1.rank===0.5)return 1;}return this.cpN(r1,r2);},
-            cpN(r1,r2){if(r1.rank>r2.rank)return 1;if(r1.rank<r2.rank)return-1;for(let i=0;i<Math.min(r1.s_a.length,r2.s_a.length);i++){if(r1.s_a[i]>r2.s_a[i])return 1;if(r1.s_a[i]<r2.s_a[i])return-1;}if(r1.cards.length>0&&r2.cards.length>0){const s1=_0x4c11[r1.cards[0].s],s2=_0x4c11[r2.cards[0].s];if(s1>s2)return 1;if(s1<s2)return-1;}return 0;},
-            upU(){document.getElementById('round-info').innerText=`ROUND ${this.round} / 7`;const c=document.getElementById('side-score'),ms=Math.max(...Object.values(this.scores));c.innerHTML=this.players.map(p=>{const l=this.logs[p].map(x=>`<td>${x}</td>`).join(""),mc=(p==='human')?'my-score':'',sc=(this.scores[p]===ms&&ms>0)?'total-winner':'total-normal';return `<div class="score-player-unit ${mc}"><div class="p-top-info"><span class="p-name-label">${this.names[p]}</span><span class="p-total-label ${sc}">${this.scores[p]}</span></div><table class="p-mini-table"><tr><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th><th>R7</th></tr><tr>${l}</tr></table></div>`;}).join("");},
-            cC(a,b){if(_0x12e3[a.v]!==_0x12e3[b.v])return _0x12e3[b.v]-_0x12e3[a.v];return _0x4c11[b.s]-_0x4c11[a.s];},
-            tCS(idx){const s=document.getElementById('sfx-click');s.volume=this.sfxVol;s.play().catch(e=>{});const si=this.selected.indexOf(idx);if(si>-1)this.selected.splice(si,1);else if(this.selected.length<4)this.selected.push(idx);document.getElementById('btn-reveal').disabled=(this.selected.length!==4);this.rn();},
-            rn(wa=false){this.players.forEach(pk=>{const ia=pk.startsWith('ai'),el=document.getElementById('cards-'+pk);el.innerHTML="";let ids=[0,1,2,3,4];if(this.phase!=='reveal'){ids.sort((a,b)=>{const ar=this.revIdx[pk].includes(a),br=this.revIdx[pk].includes(b);if(ar!==br)return br-ar;return this.cC(this.hands[pk][a],this.hands[pk][b]);});}ids.forEach((oi,vi)=>{const c=this.hands[pk][oi],d=document.createElement('div');d.className=`card ${(c.s==='♥'||c.s==='♦'?'red':'black')}`;if(this.folded[pk])d.classList.add('folded-filter');if(wa&&pk==='human'){d.classList.add('human-deal-anim');d.style.animationDelay=`${vi*0.52}s`;}let iv=!ia||(this.phase==='fold'&&this.revIdx[pk].includes(oi))||this.phase==='result';if(!iv)d.classList.add('hidden');else{if(c.is7)d.classList.add('special');d.innerHTML=`<div class="suit">${c.s==='N'?'★':c.s}</div><div class="val">${c.v}</div>`;}if(this.phase!=='reveal'){if(this.revIdx[pk].includes(oi))d.classList.add('revealed-border');if(vi===4)d.classList.add('push-right');}if(!ia&&this.phase==='reveal'){if(this.selected.includes(oi))d.classList.add('selected');d.onclick=()=>this.tCS(oi);}el.appendChild(d);});});}
-        };
-
-        window.addEventListener('keydown', (e)=>{
-            if(document.getElementById('main-screen').style.display!=='none')return;
-            if(e.key==='Shift' && document.getElementById('game-over-overlay').style.display==='flex'){_0x4a1b();_0x7f2e.resetForNewGame();return;}
-            if(e.key==='Enter'){const d=document.getElementById('btn-deal'),r=document.getElementById('btn-reveal'),s=document.getElementById('btn-showdown');if(!d.disabled){_0x4a1b();_0x7f2e.handleBtnClick('deal');}else if(!r.disabled)_0x7f2e.handleBtnClick('reveal');else if(!s.disabled)_0x7f2e.handleBtnClick('showdown');}
-            if(_0x7f2e.phase==='reveal'&&['1','2','3','4','5'].includes(e.key)){_0x7f2e.tCS(parseInt(e.key)-1);}
-            if(e.key==='0'){const f=document.getElementById('btn-fold');if(!f.disabled)_0x7f2e.handleBtnClick('fold');}
-        });
-    })();
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
