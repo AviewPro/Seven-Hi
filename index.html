@@ -36,6 +36,26 @@
             box-shadow: 0 0 2vh rgba(255, 0, 0, 0.4), inset 0 0 1.5vh rgba(255, 215, 0, 0.3);
             color: #fff;
         }
+	.gold-text {
+    /* 1. 폰트 두께 설정 */
+    font-weight: bold; 
+
+    /* 2. 정의하신 금색 그라데이션 적용 */
+    background: var(--gold-gradient);
+
+    /* 3. 배경을 글자 영역으로 제한 (가장 중요) */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* 4. 실제 글자색은 투명하게 만들어 배경이 보이게 함 */
+    color: transparent;
+
+    /* 5. (선택사항) 가독성을 위해 살짝 그림자 추가 */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    
+    /* 인라인 요소일 경우 크기가 안 잡힐 수 있으므로 추가 */
+    display: inline-block;
+}
         #btn-start { background: var(--red-gradient); font-size: 5vh; border-color: #ffd700; }
         #btn-tutorial { background: var(--gold-gradient); color: #000; font-size: 4vh; border-color: #990000; }
         .btn-main:hover { transform: scale(1.05); filter: brightness(1.2); }
