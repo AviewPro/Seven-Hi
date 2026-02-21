@@ -3,29 +3,15 @@
     --dark-bg: #050505; --card-bg: #fff;
     --gold-gradient: linear-gradient(145deg, #ffd700, #ffae00, #bf953f, #fcf6ba, #b38728);
     --red-gradient: linear-gradient(145deg, #ff0000, #cc0000, #990000);
-    --vh: 1vh;
 }
 body { 
     background: url('Casinotable.jpg') no-repeat center center fixed;
     background-size: cover;
     color: #eee; font-family: 'Pretendard', sans-serif; 
     margin: 0; display: flex; justify-content: center; align-items: center; 
-    height: 100vh; height: calc(var(--vh, 1vh) * 100);
-    width: 100vw; 
-    overflow: hidden;
-    padding: 1vh; box-sizing: border-box;
-    overscroll-behavior: none;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
+    height: 100vh; width: 100vw; overflow: hidden; padding: 1vh; box-sizing: border-box;
 }
-@media (max-aspect-ratio: 1/1) {
-    body { flex-direction: column; }
-    #side-container { width: 95vw; height: auto; margin-right: 0; margin-bottom: 1vh; margin-top: 0; }
-    .game-board { width: 95vw; height: 70vh; padding: 1.5vh; }
-    #deck-info { display: none; }
-    .p-total-label { font-size: 4vh; }
-    .action-btn-group button { width: 22vw; height: 6vh; font-size: 1.6vh; }
-}
+
 #main-screen {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: url('Seven Hi.gif') no-repeat center center;
@@ -34,6 +20,7 @@ body {
     justify-content: center; align-items: center; padding-top: 20vh;
 }
 .main-btn-group { display: flex; flex-direction: column; gap: 3vh; width: 40vw; max-width: 600px; }
+
 .btn-main {
     padding: 4vh; font-weight: 900;
     border: 0.4vh solid #bf953f; border-radius: 2vh; cursor: pointer;
@@ -41,7 +28,6 @@ body {
     white-space: nowrap; overflow: hidden;
     box-shadow: 0 0 2vh rgba(255, 0, 0, 0.4), inset 0 0 1.5vh rgba(255, 215, 0, 0.3);
     color: #fff;
-    will-change: transform;
 }
 .gold-text {
     font-weight: bold; 
@@ -55,24 +41,29 @@ body {
 #btn-start { background: var(--red-gradient); font-size: 5vh; border-color: #ffd700; }
 #btn-tutorial { background: var(--gold-gradient); color: #000; font-size: 4vh; border-color: #990000; }
 .btn-main:hover { transform: scale(1.05); filter: brightness(1.2); }
+
 #side-container {
     width: 25vw; max-width: 400px; margin-right: 2vh;
     height: 80vh; display: flex; flex-direction: column;
     margin-top: -2vh; 
 }
+
 .score-title {
     font-size: 2.5vh; font-weight: 900; background: var(--gold-gradient);
     color: #000; height: 6vh; display: flex; align-items: center; justify-content: center;
     border-radius: 1vh; border: 0.3vh solid #5d4037; margin-bottom: 1.5vh;
     text-transform: uppercase; letter-spacing: 0.2vh; box-shadow: 0 0 1.5vh rgba(255, 215, 0, 0.4);
 }
+
 #side-score { display: flex; flex-direction: column; gap: 1vh; flex-grow: 1; }
+
 .score-player-unit {
     flex: 1; display: flex; flex-direction: column; justify-content: center;
     background: rgba(0,0,0,0.85); border: 0.25vh solid transparent; 
     border-radius: 1.5vh; padding: 1vh 2vh; box-sizing: border-box;
 }
 .score-player-unit.my-score { border-color: #fff; box-shadow: 0 0 1vh rgba(255,255,255,0.3); }
+
 .p-top-info { 
     display: flex; justify-content: space-between; align-items: baseline;
     border-bottom: 0.15vh solid rgba(0,255,255,0.3); margin-bottom: 0.5vh;
@@ -81,9 +72,11 @@ body {
 .p-total-label { font-size: 6vh; font-weight: 900; line-height: 1; }
 .total-winner { color: #ff3333; text-shadow: 0 0 1.5vh rgba(255, 0, 0, 0.8); }
 .total-normal { color: #fff; }
+
 .p-mini-table { width: 100%; border-collapse: collapse; text-align: center; table-layout: fixed; }
 .p-mini-table th { color: #fff; border: 0.1vh solid #555; padding: 0.2vh; font-size: 1.4vh; width: 14.28%; }
 .p-mini-table td { color: #ffd700; border: 0.1vh solid #555; height: 3vh; font-weight: bold; font-size: 1.8vh; }
+
 .game-board {
     width: fit-content; min-width: calc(fit-content * 1.05); 
     max-width: 90vw; background: url('tablecloth.png'); background-size: cover;
@@ -91,6 +84,7 @@ body {
     height: 95vh; display: flex; flex-direction: column; justify-content: flex-start;
     box-shadow: inset 0 0 5vh #000; box-sizing: border-box; align-items: center; 
 }
+
 .static-gold-box { 
     font-size: 3vh; font-weight: 900; background: var(--gold-gradient);
     color: #000; height: 6vh; width: 100%; display: flex; align-items: center; justify-content: center;
@@ -99,7 +93,9 @@ body {
     text-transform: uppercase; letter-spacing: 0.3vh; margin-bottom: 1vh;
     box-sizing: border-box;
 }
+
 #round-info { font-size: 2.5vh; color: #fff; text-shadow: 0 0 1vh var(--neon-cyan); font-weight: 900; text-align: center; margin-bottom: 1.5vh; }
+
 .game-msg { 
     font-size: 2.2vh; font-weight: 900; color: #ffd700;
     background: rgba(0,0,0,0.8); width: 100%; text-align: center;
@@ -107,6 +103,7 @@ body {
     border-top: 0.3vh solid #bf953f; border-bottom: 0.3vh solid #bf953f;
     box-sizing: border-box; text-shadow: 0 0 0.8vh rgba(255,215,0,0.5);
 }
+
 .player-zone {
     flex: 1; background: rgba(255,255,255,0.05);
     padding: 0 2.5vh; border-radius: 2vh; display: flex; align-items: center; gap: 2vh;
@@ -114,25 +111,29 @@ body {
     width: fit-content;
 }
 #zone-human { border-color: #fff !important; box-shadow: 0 0 2vh rgba(255,255,255,0.2); }
+
 .p-meta { width: 18vh; flex-shrink: 0; text-align: center; }
 .p-result { font-size: 2.2vh; font-weight: 900; height: 1.2em; transition: color 0.3s; }
 .p-fold-rank { font-size: 1.4vh; color: #888; margin-top: 0.3vh; }
+
 .txt-win { color: #ff3333; text-shadow: 0 0 1vh rgba(255, 0, 0, 0.7); }   
 .txt-lose { color: #000000; text-shadow: 0 0 0.5vh #fff; } 
 .txt-fold { color: #888888; }   
+
 .cards-row { display: flex; gap: 1.5vh; flex-grow: 1; height: 100%; align-items: center; width: fit-content; }
 .footer-ui { margin-top: auto; display: flex; flex-direction: column; align-items: center; width: 100%; }
+
 .action-btn-group { display: flex; gap: 2vh; justify-content: center; width: 100%; }
 .action-btn-group button {
     width: 18vh; height: 7vh;
     background: #27ae60; color: white; border: none;
     font-size: 2.2vh; font-weight: bold; cursor: pointer; border-radius: 1.2vh;
     transition: transform 0.1s; display: flex; align-items: center; justify-content: center;
-    will-change: transform;
 }
 .action-btn-group button:active { transform: scale(0.95); }
 .action-btn-group button.fold-btn { background: #c0392b; }
 .action-btn-group button:disabled { background: #7f8c8d; cursor: not-allowed; transform: none; }
+
 .card, .mini-card {
     height: 100%; aspect-ratio: 5/7;
     background: var(--card-bg); color: #000; border-radius: 1vh;
@@ -141,24 +142,28 @@ body {
     border-right: 0.6vh solid #000; border-bottom: 0.6vh solid #000;
     transition: all 0.3s; cursor: pointer; user-select: none; flex-shrink: 0;
     width: auto; box-sizing: border-box;
-    will-change: transform;
 }
+
 .human-deal-anim { animation: dealFromDeck 0.52s cubic-bezier(0.25, 1, 0.5, 1) forwards; opacity: 0; }
 @keyframes dealFromDeck { 0% { transform: translate(60vw, -20vh) rotate(45deg); opacity: 0; } 100% { transform: translate(0, 0) rotate(0); opacity: 1; } }
+
 .card.hidden { 
     background: #2c3e50 !important; background-image: repeating-conic-gradient(#34495e 0% 25%, #2c3e50 0% 50%) !important;
     background-size: 2vh 2vh !important; border: 0.3vh solid #1a252f; color: transparent !important;
     border-right: 0.6vh solid #000; border-bottom: 0.6vh solid #000; box-shadow: inset 0 0 1.5vh rgba(0,0,0,0.5);
 }
+
 .mini-card { height: 11vh; width: calc(11vh * (5/7)); }
 .mini-card.empty { background: rgba(255,255,255,0.1); border: 0.2vh dashed #444; color: transparent; }
 .mini-card.locked { background: #555 !important; border: 0.2vh solid #333; border-right: 0.6vh solid #000; border-bottom: 0.6vh solid #000; color: transparent !important; }
+
 .card.folded-filter { opacity: 0.3; filter: grayscale(0.8); }
 .card.red, .mini-card.red { color: #d63031; }
 .card.black, .mini-card.black { color: #2d3436; }
 .card.special, .mini-card.special { background: #ffeaa7; border-color: #f39c12; }
 .card.selected { border-color: var(--neon-green); transform: translateY(-1.5vh); }
 .card.revealed-border { border-color: var(--neon-cyan); }
+
 #tutorial-overlay {
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background: rgba(0,0,0,0.6); z-index: 5000; flex-direction: column; 
@@ -166,9 +171,10 @@ body {
 }
 .tutorial-msg-box {
     background: #1a1a1a; border: 0.3vh solid #666; padding: 2vh 3vh; 
-    border-radius: 2vh; width: 85vh; max-width: 90vw; text-align: center; 
+    border-radius: 2vh; width: 85vh; text-align: center; 
     box-shadow: 0 0 2vh rgba(0,0,0,0.8); position: relative; pointer-events: auto;
 }
+
 .tut-table {
     width: 90%; margin: 2vh auto; border-collapse: collapse; color: #eee; font-size: 1.6vh;
 }
@@ -182,12 +188,15 @@ body {
     font-weight: bold;
     box-shadow: inset 0 0 1vh rgba(255, 215, 0, 0.3);
 }
+
 .tutorial-highlight { outline: 0.5vh solid #ff4b2b !important; box-shadow: 0 0 5vh #ff4b2b !important; opacity: 1 !important; pointer-events: auto !important; z-index: 6000 !important; position: relative; }
 .tutorial-active-lock { pointer-events: none !important; }
 .tutorial-active-lock #tutorial-overlay, .tutorial-active-lock #tutorial-overlay *, .tutorial-active-lock .tutorial-highlight { pointer-events: auto !important; }
+
 .card .suit, .mini-card .suit { font-size: 2.8vh; line-height: 1; }
 .card .val, .mini-card .val { font-size: 3.5vh; font-weight: 900; line-height: 1; }
 .push-right { margin-left: auto; }
+
 #game-over-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.95); z-index: 2000; display: none;
@@ -195,10 +204,11 @@ body {
 }
 .final-board {
     background: rgba(30,30,30,0.9); border: 0.6vh solid #bf953f; border-radius: 4vh;
-    padding: 5vh; width: 85vh; max-width: 90vw; text-align: center; box-shadow: 0 0 6vh rgba(255, 215, 0, 0.3);
+    padding: 5vh; width: 85vh; text-align: center; box-shadow: 0 0 6vh rgba(255, 215, 0, 0.3);
 }
 .final-winner { font-size: 6vh; font-weight: 900; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4vh; }
 #final-score-container { display: flex; flex-direction: column; gap: 1.5vh; margin-bottom: 2vh; }
+
 #deck-info {
     width: 15vh; margin-left: 2vh; background: rgba(0,0,0,0.7);
     border: 0.2vh solid #444; padding: 1.5vh; border-radius: 1.5vh; text-align: center;
@@ -206,6 +216,7 @@ body {
     align-self: center; justify-content: center;
 }
 .remaining-container { display: flex; flex-direction: column; gap: 0.8vh; align-items: center; margin-top: 1.5vh; overflow-y: auto; flex-grow: 1; width: 100%; justify-content: center; }
+
 #sound-controls { position: fixed; bottom: 3vh; right: 3vh; z-index: 3000; display: flex; flex-direction: column; align-items: flex-end; gap: 1.5vh; }
 #sound-panel { background: rgba(0,0,0,0.9); border: 0.3vh solid #bf953f; border-radius: 2vh; padding: 2vh; display: none; flex-direction: column; gap: 1.5vh; min-width: 16vh; }
 .sound-row { display: flex; flex-direction: column; gap: 0.8vh; }

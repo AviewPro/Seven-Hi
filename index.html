@@ -2,20 +2,19 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>SEVEN HI</title>
     <link rel="icon" type="image/png" href="7.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="idle">
+
     <div id="main-screen">
         <div class="main-btn-group">
             <button id="btn-start" class="btn-main" onclick="_0x4a1b(); _0x7f2e.startGame()">START</button>
             <button id="btn-tutorial" class="btn-main" onclick="_0x4a1b(); _0x1b2c()">TUTORIAL</button>
         </div>
     </div>
+
     <div id="tutorial-overlay">
         <div class="tutorial-msg-box">
             <h3 id="tut-title" style="color: #ccc; font-size: 2.8vh; margin-bottom: 1.5vh;"></h3>
@@ -24,6 +23,7 @@
             <div id="tut-esc-guide" style="font-size: 1.4vh; color: #888; margin-top: 2vh;">ESC를 누르면 언제든지 메인화면으로 돌아갑니다.</div>
         </div>
     </div>
+
     <div id="game-over-overlay">
         <div class="final-board">
             <div id="final-winner-text" class="final-winner">WINNER: YOU</div>
@@ -34,6 +34,7 @@
             </div>
         </div>
     </div>
+
     <div id="sound-controls">
         <div id="sound-panel">
             <div class="sound-row"><label>BGM</label><input type="range" min="0" max="1" step="0.01" value="0.06" id="vol-bgm" oninput="_0x8c9d('bgm', this.value)"></div>
@@ -41,14 +42,17 @@
         </div>
         <button id="btn-sound-toggle" onclick="_0x2b3c()">⚙️</button>
     </div>
-    <audio id="bgm" src="casinojazz.mp3" loop preload="auto"></audio>
-    <audio id="sfx-click" src="delt1.mp3" preload="auto"></audio>
-    <audio id="sfx-btn" src="Click.mp3" preload="auto"></audio>
-    <audio id="sfx-delt4" src="delt4.mp3" preload="auto"></audio>
+
+    <audio id="bgm" src="casinojazz.mp3" loop></audio>
+    <audio id="sfx-click" src="delt1.mp3"></audio>
+    <audio id="sfx-btn" src="Click.mp3"></audio>
+    <audio id="sfx-delt4" src="delt4.mp3"></audio>
+
     <div id="side-container">
         <div class="score-title">SCORE BOARD</div>
         <div id="side-score"></div>
     </div>
+
     <div class="game-board">
         <div class="static-gold-box">WELCOME TO SEVEN Hi</div>
         <div id="round-info">ROUND 1 / 7</div>
@@ -66,10 +70,12 @@
             </div>
         </div>
     </div>
+
     <div id="deck-info">
         <div class="guide-h" style="font-size:1.4vh; font-weight:bold; color:#ffd700;">UNREVEALED</div>
         <div id="remaining-cards" class="remaining-container"></div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
