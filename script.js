@@ -4,6 +4,7 @@
     const _0x4c11 = {'♠':4,'♥':3,'♦':2,'♣':1,'N':0};
     const _0x3b2a = ['♠','♥','♣','♦'];
     let _0x9d2e = null;
+    let _streak = 0; // 연승 카운터
 
     const _0x2a1c = fetch('textdata.json').then(r=>r.json()).then(d=>{_0x9d2e=d;document.getElementById('msg-box').innerText=_0x9d2e.gameMsg.ready;return d;}).catch(e=>console.error(e));
 
@@ -30,12 +31,12 @@
             if(a==='fold'||a==='showdown'){if(a==='fold')this.hmF();else this.exS();if(_0x6b2d&&_0x8f1e===10){_0x8f1e=11;_0x5c6d();}}
         },
         startGame(){document.getElementById('main-screen').style.display='none';this.handleBtnClick('deal');},
-        resetForNewGame(){document.getElementById('game-over-overlay').style.display='none';this.round=1;this.scores={ai1:0,ai2:0,ai3:0,human:0};this.logs={ai1:Array(7).fill(''),ai2:Array(7).fill(''),ai3:Array(7).fill(''),human:Array(7).fill('')};this.dl();},
+        resetForNewGame(){document.getElementById('game-over-overlay').style.display='none';document.getElementById('congratulation-msg').style.display='none';this.round=1;this.scores={ai1:0,ai2:0,ai3:0,human:0};this.logs={ai1:Array(7).fill(''),ai2:Array(7).fill(''),ai3:Array(7).fill(''),human:Array(7).fill('')};this.dl();},
         dl(){
             const b=document.getElementById('bgm');if(b.paused){b.volume=0.06;b.play().catch(e=>{});}
             if(this.round>7)return;this.phase='reveal';this.selected=[];this.folded={ai1:false,ai2:false,ai3:false,human:false};
             this.players.forEach(p=>{document.getElementById('zone-'+p).classList.remove('folded');document.getElementById('fold-rank-'+p).innerText="";const r=document.getElementById('res-'+p);r.className='p-result';r.innerText="";});
-            let d=[];_0x5f2a.slice(1).forEach(v=>_0x3b2a.forEach(s=>d.push({v,s,is7:false})));d.push({v:'7',s:'N',is7:true});d.sort(()=>Math.random()-05);
+            let d=[];_0x5f2a.slice(1).forEach(v=>_0x3b2a.forEach(s=>d.push({v,s,is7:false})));d.push({v:'7',s:'N',is7:true});d.sort(()=>Math.random()-0.5);
             this.players.forEach((p,i)=>{this.hands[p]=d.slice(i*5,(i+1)*5);if(p.startsWith('ai'))this.aiDR(p);});
             this.deck=d.slice(20);document.getElementById('btn-deal').disabled=true;document.getElementById('msg-box').innerText=_0x9d2e?_0x9d2e.gameMsg.selectReveal:"";
             this.rn(true);this.upU();this.shU();
@@ -53,7 +54,7 @@
                 this.players.forEach(po=>{if(po===p)return;this.hands[po].forEach((c,idx)=>{if(!this.revIdx[po].includes(idx))pl.push(c);});});
                 let sc=[];const pt=(a,m=[])=>{if(sc.length>=24)return;if(a.length===0)sc.push(m);else{for(let i=0;i<a.length;i++){let c=a.slice(),n=c.splice(i,1);pt(c,m.concat(n));if(sc.length>=24)return;}}};pt(pl);
                 if(mE.rank===10){const afs=this.players.some(po=>{if(po===p)return false;const vc=this.revIdx[po].map(idx=>this.hands[po][idx]);return this.ev(vc).rank>=1;});if(afs)sY=true;if(!sY){let ssc=0;sc.forEach(s=>{let si=0,hss=false;this.players.forEach(po=>{if(po===p)return;const sm=this.revIdx[po].map(idx=>this.hands[po][idx]);sm.push(s[si++]);if(this.ev(sm).rank>=1)hss=true;});if(hss)ssc++;});if(ssc>=18)sY=true;}if(!sY&&Math.random()<0.5)sY=true;}
-                else{let wc=0;sc.forEach(s=>{let si=0;const be=[];this.players.forEach(pc=>{if(pc===p)be.push({p:pc,ev:mE});else{const fh=this.revIdx[pc].map(idx=>this.hands[pc][idx]);fh.push(s[si++]);be.push({p:pc,ev:this.ev(fh)});}});const ws=this.jdR(be,be.map(b=>b.p));if(ws.includes(p))wc++;});if(wc>=7)sY=true;}
+                else{let wc=0;sc.forEach(s=>{let si=0;const be=[];this.players.forEach(pc=>{if(pc===p)be.push({p:pc,ev:mE});else{const fh=this.revIdx[pc].map(idx=>this.hands[pc][idx]);fh.push(s[si++]);be.push({p:pc,ev:this.ev(fh)});}});const ws=this.jdR(be,be.map(b=>b.p));if(ws.includes(p))wc++;});if(wc>=9)sY=true;}
                 if(!sY)this.f(p,1);
             });
         },
@@ -65,8 +66,28 @@
         exS(ihf=false){this.phase='result';if(!ihf)this.aiPF();document.getElementById('btn-fold').disabled=true;document.getElementById('btn-showdown').disabled=true;const ak=this.players.filter(p=>!this.folded[p]);if(ak.length>0){const rs={};this.players.forEach(p=>rs[p]=this.ev(this.hands[p]));const ws=this.jd(rs,ak);this.players.forEach(p=>{if(!this.folded[p]){const r=document.getElementById('res-'+p);r.innerText=rs[p].name;r.className=ws.includes(p)?"p-result txt-win":"p-result txt-lose";}});ws.forEach(w=>{let s=ak.length+2+(rs[w].rank===10?1:0);this.scores[w]+=s;this.logs[w][this.round-1]=s;});ak.forEach(p=>{if(!ws.includes(p))this.logs[p][this.round-1]=0;});}this.rn();this.upU();this.shU();if(this.round>=7)setTimeout(()=>this.shFR(),2000);else{this.round++;document.getElementById('btn-deal').disabled=false;}},
         shFR(){
             const o=document.getElementById('game-over-overlay'),w=document.getElementById('final-winner-text'),s=document.getElementById('final-score-container'),ms=Math.max(...Object.values(this.scores)),ws=this.players.filter(p=>this.scores[p]===ms);
+            
+            // 플레이어 승패 판정 및 연승 카운트
+            if(ws.includes('human')) {
+                _streak++;
+                if(_streak === 7) document.getElementById('congratulation-msg').style.display = 'block';
+            } else {
+                _streak = 0;
+            }
+
             w.innerText=ws.length>1?`DRAW: ${ws.map(p=>this.names[p]).join(' & ')}`:`WINNER: ${this.names[ws[0]]}`;
-            s.innerHTML=this.players.map(p=>{const l=this.logs[p].map(x=>`<td>${x}</td>`).join(""),mc=(p==='human')?'my-score':'',sc=(this.scores[p]===ms)?'total-winner':'total-normal';return `<div class="score-player-unit ${mc}" style="flex:none; margin-bottom:1vh; padding:1.5vh;"><div class="p-top-info"><span class="p-name-label">${this.names[p]}</span><span class="p-total-label ${sc}">${this.scores[p]}</span></div><table class="p-mini-table"><tr><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th><th>R7</th></tr><tr>${l}</tr></table></div>`;}).join("");o.style.display='flex';
+            s.innerHTML=this.players.map(p=>{const l=this.logs[p].map(x=>`<td>${x}</td>`).join(""),mc=(p==='human')?'my-score':'',sc=(this.scores[p]===ms)?'total-winner':'total-normal';
+            
+            // 플레이어(YOU) 일 때만 스트릭 표시
+            let streakHtml = "";
+            if(p === 'human') {
+                let streakColor = "streak-white";
+                if(_streak >= 3) streakColor = "streak-red";
+                if(_streak >= 6) streakColor = "streak-gold";
+                streakHtml = `<div class="streak-label ${streakColor}">Winning Streak: ${_streak}</div>`;
+            }
+
+            return `<div class="score-player-unit ${mc}" style="flex:none; margin-bottom:1vh; padding:1.5vh;"><div class="p-top-info"><span class="p-name-label">${this.names[p]} ${streakHtml}</span><span class="p-total-label ${sc}">${this.scores[p]}</span></div><table class="p-mini-table"><tr><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th><th>R7</th></tr><tr>${l}</tr></table></div>`;}).join("");o.style.display='flex';
         },
         ev(c){
             let v={},h7=false,sd=[...c].sort((a,b)=>this.cC(a,b));c.forEach(x=>{v[x.v]=(v[x.v]||0)+1;if(x.is7)h7=true;});let ct=Object.entries(v).sort((a,b)=>b[1]-a[1]||_0x12e3[b[0]]-_0x12e3[a[0]]);let r={rank:0,name:"HIGH CARD",s_a:sd.map(x=>_0x12e3[x.v]),h7,cards:sd};

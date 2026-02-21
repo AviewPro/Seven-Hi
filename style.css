@@ -223,3 +223,18 @@ body {
 .sound-row label { font-size: 1.6vh; color: #ffd700; font-weight: bold; }
 .sound-row input { cursor: pointer; accent-color: #ffd700; width: 100%; height: 1vh; }
 #btn-sound-toggle { width: 6vh; height: 6vh; border-radius: 50%; background: var(--gold-gradient); border: 0.3vh solid #5d4037; cursor: pointer; font-size: 3vh; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 1.5vh rgba(255,215,0,0.5); }
+
+/* Winning Streak Style */
+.streak-label { font-size: 1.4vh; font-weight: bold; margin-top: 0.5vh; }
+.streak-white { color: #ffffff; }
+.streak-red { color: #ff4b2b; text-shadow: 0 0 0.5vh rgba(255,0,0,0.5); }
+.streak-gold { background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 900; }
+#congratulation-msg { 
+    position: fixed; top: 10%; left: 0; width: 100%; text-align: center; 
+    font-size: 12vh; font-weight: 900; background: var(--gold-gradient); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+    z-index: 3000; display: none; pointer-events: none;
+    text-shadow: 0 0 3vh rgba(255, 215, 0, 0.5);
+    animation: bounce 1s infinite alternate;
+}
+@keyframes bounce { from { transform: scale(1); } to { transform: scale(1.1); } }
