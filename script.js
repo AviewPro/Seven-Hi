@@ -1,125 +1,118 @@
-let TEXT_DATA = null;
+let _0x2a1b = null;
+const _0x4c2e = fetch('textdata.json').then(_0x1b2c => _0x1b2c.json()).then(_0x5d3e => {
+    _0x2a1b = _0x5d3e;
+    document.getElementById('msg-box').innerText = _0x2a1b.gameMsg.ready;
+    return _0x5d3e;
+}).catch(_0x9f8e => console.error("Data Load Error:", _0x9f8e));
 
-// JSON 로드 완료 시까지 기다리는 Promise 생성
-const dataPromise = fetch('textdata.json')
-    .then(res => res.json())
-    .then(data => {
-        TEXT_DATA = data;
-        document.getElementById('msg-box').innerText = TEXT_DATA.gameMsg.ready;
-        return data;
-    })
-    .catch(err => console.error("Data Load Error:", err));
-
-const firebaseConfig = { 
-    apiKey: "AIzaSyCvxUeqc28cRZ8RL4jpAwtakMxRo5d6zbU", 
-    authDomain: "aviewpro.firebaseapp.com", 
-    databaseURL: "https://aviewpro-default-rtdb.asia-southeast1.firebasedatabase.app", 
-    projectId: "aviewpro", 
-    storageBucket: "aviewpro.firebasestorage.app", 
-    messagingSenderId: "592622610945", 
-    appId: "1:592622610945:web:7d56b09e966a4faac62e00", 
-    measurementId: "G-NZQ5ZFXG2F" 
+const _0xfbConfig = {
+    apiKey: "AIzaSyCvxUeqc28cRZ8RL4jpAwtakMxRo5d6zbU",
+    authDomain: "aviewpro.firebaseapp.com",
+    databaseURL: "https://aviewpro-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "aviewpro",
+    storageBucket: "aviewpro.firebasestorage.app",
+    messagingSenderId: "592622610945",
+    appId: "1:592622610945:web:7d56b09e966a4faac62e00",
+    measurementId: "G-NZQ5ZFXG2F"
 };
 
-window.addEventListener('keydown', (e) => {
+window.addEventListener('keydown', (_0xe) => {
     if (document.getElementById('main-screen').style.display !== 'none') return;
-    if (e.key === 'Shift') {
-        const gameOverOverlay = document.getElementById('game-over-overlay');
-        if (gameOverOverlay.style.display === 'flex') {
-            playDelt4(); gm.resetForNewGame();
+    if (_0xe.key === 'Shift') {
+        const _0xov = document.getElementById('game-over-overlay');
+        if (_0xov.style.display === 'flex') {
+            _0x5a1b2c(); _0x4f2d1e.resetForNewGame();
             return;
         }
     }
-    if (e.key === 'Enter') {
-        const dealBtn = document.getElementById('btn-deal');
-        const revealBtn = document.getElementById('btn-reveal');
-        const showdownBtn = document.getElementById('btn-showdown');
-        if (!dealBtn.disabled) { playDelt4(); gm.handleBtnClick('deal'); }
-        else if (!revealBtn.disabled) gm.handleBtnClick('reveal');
-        else if (!showdownBtn.disabled) gm.handleBtnClick('showdown');
+    if (_0xe.key === 'Enter') {
+        const _0xdB = document.getElementById('btn-deal');
+        const _0xrB = document.getElementById('btn-reveal');
+        const _0xsB = document.getElementById('btn-showdown');
+        if (!_0xdB.disabled) { _0x5a1b2c(); _0x4f2d1e.handleBtnClick('deal'); }
+        else if (!_0xrB.disabled) _0x4f2d1e.handleBtnClick('reveal');
+        else if (!_0xsB.disabled) _0x4f2d1e.handleBtnClick('showdown');
     }
-    if (gm.phase === 'reveal' && ['1', '2', '3', '4', '5'].includes(e.key)) {
-        gm.toggleCardSelection(parseInt(e.key) - 1);
+    if (_0x4f2d1e.phase === 'reveal' && ['1', '2', '3', '4', '5'].includes(_0xe.key)) {
+        _0x4f2d1e.toggleCardSelection(parseInt(_0xe.key) - 1);
     }
-    if (e.key === '0') {
-        const foldBtn = document.getElementById('btn-fold');
-        if (!foldBtn.disabled) gm.handleBtnClick('fold');
+    if (_0xe.key === '0') {
+        const _0xfB = document.getElementById('btn-fold');
+        if (!_0xfB.disabled) _0x4f2d1e.handleBtnClick('fold');
     }
 });
 
-function playDelt4() {
-    const sfx = document.getElementById('sfx-delt4');
-    if(sfx) {
-        sfx.volume = 1.0; sfx.currentTime = 0; sfx.play().catch(e => {});
+function _0x5a1b2c() {
+    const _0xs = document.getElementById('sfx-delt4');
+    if (_0xs) {
+        _0xs.volume = 1.0; _0xs.currentTime = 0; _0xs.play().catch(_0xerr => {});
     }
 }
 
-function updateMasterVol(type, val) {
-    if(type === 'bgm') document.getElementById('bgm').volume = val;
-    if(type === 'sfx') gm.sfxVol = val;
+function _0x7a8b9c(_0xt, _0xv) {
+    if (_0xt === 'bgm') document.getElementById('bgm').volume = _0xv;
+    if (_0xt === 'sfx') _0x4f2d1e.sfxVol = _0xv;
 }
 
-function toggleSoundPanel() {
-    const p = document.getElementById('sound-panel');
-    p.style.display = p.style.display === 'flex' ? 'none' : 'flex';
+function _0x2c3d4e() {
+    const _0xp = document.getElementById('sound-panel');
+    _0xp.style.display = _0xp.style.display === 'flex' ? 'none' : 'flex';
 }
 
-const VAL_ORDER = {'7':6, 'A':5, '5':4, '4':3, '3':2, '2':1};
-const SUIT_ORDER = {'♠':4, '♥':3, '♦':2, '♣':1, 'N':0};
-const VALUES = ['2', '3', '4', '5', 'A'];
-const SUITS = ['♠', '♥', '♣', '♦'];
+const _0xVO = {'7':6, 'A':5, '5':4, '4':3, '3':2, '2':1};
+const _0xSO = {'♠':4, '♥':3, '♦':2, '♣':1, 'N':0};
+const _0xV = ['2', '3', '4', '5', 'A'];
+const _0xS = ['♠', '♥', '♣', '♦'];
 
-let _0xisTutorial = false;
-let _0xtutorialStep = 0;
+let _0xist = false;
+let _0xst = 0;
 
-async function _0x1d2e() {
-    if (!TEXT_DATA) await dataPromise; 
-    _0xisTutorial = true; _0xtutorialStep = 1;
+async function _0x1a2b3c() {
+    if (!_0x2a1b) await _0x4c2e;
+    _0xist = true; _0xst = 1;
     document.getElementById('main-screen').style.display = 'none';
     document.body.classList.add('tutorial-active-lock');
-    window.addEventListener('keydown', _0xHandleEsc);
+    window.addEventListener('keydown', _0xHesc);
     _0xappTut();
 }
 
-function _0xHandleEsc(e) { if (e.key === 'Escape') { _0xisTutorial = false; location.reload(); } }
+function _0xHesc(_0xe) { if (_0xe.key === 'Escape') { _0xist = false; location.reload(); } }
 
 function _0xappTut() {
-    if (!TEXT_DATA) return;
-    const title = document.getElementById('tut-title');
-    const desc = document.getElementById('tut-desc');
-    const overlay = document.getElementById('tutorial-overlay');
-    document.querySelectorAll('.tutorial-highlight').forEach(el => el.classList.remove('tutorial-highlight'));
-    
-    const stepKey = 'step' + _0xtutorialStep;
-    const data = TEXT_DATA.tutorial[stepKey];
-    
-    if (data) {
-        title.innerText = data.title;
-        desc.innerHTML = data.content;
-        overlay.style.display = 'flex';
+    if (!_0x2a1b) return;
+    const _0xti = document.getElementById('tut-title');
+    const _0xde = document.getElementById('tut-desc');
+    const _0xov = document.getElementById('tutorial-overlay');
+    document.querySelectorAll('.tutorial-highlight').forEach(_0xel => _0xel.classList.remove('tutorial-highlight'));
+    const _0xsk = 'step' + _0xst;
+    const _0xd = _0x2a1b.tutorial[_0xsk];
+    if (_0xd) {
+        _0xti.innerText = _0xd.title;
+        _0xde.innerHTML = _0xd.content;
+        _0xov.style.display = 'flex';
     } else {
-        overlay.style.display = 'none';
-        if (_0xtutorialStep === 4) document.getElementById('btn-deal').classList.add('tutorial-highlight');
-        if (_0xtutorialStep === 7) { 
-            document.getElementById('zone-human').classList.add('tutorial-highlight'); 
-            document.getElementById('btn-reveal').classList.add('tutorial-highlight'); 
+        _0xov.style.display = 'none';
+        if (_0xst === 4) document.getElementById('btn-deal').classList.add('tutorial-highlight');
+        if (_0xst === 7) {
+            document.getElementById('zone-human').classList.add('tutorial-highlight');
+            document.getElementById('btn-reveal').classList.add('tutorial-highlight');
         }
-        if (_0xtutorialStep === 10) { 
-            document.getElementById('btn-showdown').classList.add('tutorial-highlight'); 
-            document.getElementById('btn-fold').classList.add('tutorial-highlight'); 
+        if (_0xst === 10) {
+            document.getElementById('btn-showdown').classList.add('tutorial-highlight');
+            document.getElementById('btn-fold').classList.add('tutorial-highlight');
         }
     }
 }
 
-function _0x5a1b() {
-    const btnSfx = document.getElementById('sfx-btn');
-    btnSfx.volume = gm.sfxVol; btnSfx.currentTime = 0; btnSfx.play().catch(e => {});
-    _0xtutorialStep++;
-    if (_0xtutorialStep > 12) { _0xisTutorial = false; location.reload(); return; }
+function _0x3d4e5f() {
+    const _0xbs = document.getElementById('sfx-btn');
+    _0xbs.volume = _0x4f2d1e.sfxVol; _0xbs.currentTime = 0; _0xbs.play().catch(_0xerr => {});
+    _0xst++;
+    if (_0xst > 12) { _0xist = false; location.reload(); return; }
     _0xappTut();
 }
 
-const gm = {
+const _0x4f2d1e = {
     round: 1, players: ['ai1', 'ai2', 'ai3', 'human'],
     totalScores: { ai1:0, ai2:0, ai3:0, human:0 },
     roundLogs: { ai1: Array(7).fill(''), ai2: Array(7).fill(''), ai3: Array(7).fill(''), human: Array(7).fill('') },
@@ -128,12 +121,12 @@ const gm = {
     isFolded: { ai1:false, ai2:false, ai3:false, human:false },
     selected: [], deckLeft: [], phase: 'idle', sfxVol: 0.4,
 
-    handleBtnClick(action) {
-        const btnSfx = document.getElementById('sfx-btn');
-        btnSfx.volume = this.sfxVol; btnSfx.currentTime = 0; btnSfx.play().catch(e => {});
-        if(action === 'deal') { this.deal(); if(_0xisTutorial && _0xtutorialStep === 4) { _0xtutorialStep = 5; _0xappTut(); } }
-        if(action === 'reveal') { this.toFoldPhase(); if(_0xisTutorial && _0xtutorialStep === 7) { _0xtutorialStep = 8; _0xappTut(); } }
-        if(action === 'fold' || action === 'showdown') { if(action === 'fold') this.humanFold(); else this.executeShowdown(); if(_0xisTutorial && _0xtutorialStep === 10) { _0xtutorialStep = 11; _0xappTut(); } }
+    handleBtnClick(_0xa) {
+        const _0xbs = document.getElementById('sfx-btn');
+        _0xbs.volume = this.sfxVol; _0xbs.currentTime = 0; _0xbs.play().catch(_0xerr => {});
+        if(_0xa === 'deal') { this.deal(); if(_0xist && _0xst === 4) { _0xst = 5; _0xappTut(); } }
+        if(_0xa === 'reveal') { this.toFoldPhase(); if(_0xist && _0xst === 7) { _0xst = 8; _0xappTut(); } }
+        if(_0xa === 'fold' || _0xa === 'showdown') { if(_0xa === 'fold') this.humanFold(); else this.executeShowdown(); if(_0xist && _0xst === 10) { _0xst = 11; _0xappTut(); } }
     },
     startGame() { document.getElementById('main-screen').style.display = 'none'; this.handleBtnClick('deal'); },
     resetForNewGame() {
@@ -143,289 +136,285 @@ const gm = {
         this.deal();
     },
     deal() {
-        const audio = document.getElementById('bgm'); if(audio.paused) { audio.volume = 0.06; audio.play().catch(e => {}); }
+        const _0xaud = document.getElementById('bgm'); if(_0xaud.paused) { _0xaud.volume = 0.06; _0xaud.play().catch(_0xe => {}); }
         if (this.round > 7) return;
         this.phase = 'reveal'; this.selected = []; this.isFolded = { ai1:false, ai2:false, ai3:false, human:false };
         this.clearResults();
-        this.players.forEach(p => { 
-            document.getElementById('zone-'+p).classList.remove('folded'); 
-            document.getElementById('fold-rank-'+p).innerText = ""; 
-            const resEl = document.getElementById('res-'+p); resEl.className = 'p-result'; resEl.innerText = ""; 
+        this.players.forEach(_0xp => {
+            document.getElementById('zone-'+_0xp).classList.remove('folded');
+            document.getElementById('fold-rank-'+_0xp).innerText = "";
+            const _0xre = document.getElementById('res-'+_0xp); _0xre.className = 'p-result'; _0xre.innerText = "";
         });
-        let deck = []; VALUES.forEach(v => SUITS.forEach(s => deck.push({v, s, is7:false})));
-        deck.push({v: '7', s: 'N', is7: true}); deck.sort(() => Math.random() - 0.5);
-        this.players.forEach((p, i) => { 
-            this.hands[p] = deck.slice(i * 5, (i + 1) * 5); 
-            if(p.startsWith('ai')) this.aiDecideReveal(p); 
+        let _0xdk = []; _0xV.forEach(_0xv => _0xS.forEach(_0xs => _0xdk.push({v:_0xv, s:_0xs, is7:false})));
+        _0xdk.push({v: '7', s: 'N', is7: true}); _0xdk.sort(() => Math.random() - 0.5);
+        this.players.forEach((_0xp, _0xi) => {
+            this.hands[_0xp] = _0xdk.slice(_0xi * 5, (_0xi + 1) * 5);
+            if(_0xp.startsWith('ai')) this.aiDecideReveal(_0xp);
         });
-        this.deckLeft = deck.slice(20);
-        document.getElementById('btn-deal').disabled = true; 
-        document.getElementById('msg-box').innerText = TEXT_DATA ? TEXT_DATA.gameMsg.selectReveal : "";
+        this.deckLeft = _0xdk.slice(20);
+        document.getElementById('btn-deal').disabled = true;
+        document.getElementById('msg-box').innerText = _0x2a1b ? _0x2a1b.gameMsg.selectReveal : "";
         this.render(true);
-        this.updateUI(); 
+        this.updateUI();
         this.showUnrevealed();
     },
 
-    aiDecideReveal(p) {
-        const hand = this.hands[p];
-        const ev = this.evaluate(hand);
-        const vCounts = {};
-        hand.forEach((c, i) => { vCounts[c.v] = vCounts[c.v] || []; vCounts[c.v].push(i); });
-        let hideIdx = -1;
-        if (ev.rank === 0.5) {
-            const pairVal = Object.keys(vCounts).find(v => vCounts[v].length === 2);
-            if (pairVal) hideIdx = vCounts[pairVal][0];
-        } 
-        else if (ev.rank === 10) { hideIdx = hand.findIndex(c => c.is7); } 
-        else if (ev.rank === 6) {
-            const fourVal = Object.keys(vCounts).find(v => vCounts[v].length === 4);
-            if (fourVal) hideIdx = vCounts[fourVal][0];
+    aiDecideReveal(_0xp) {
+        const _0xh = this.hands[_0xp];
+        const _0xev = this.evaluate(_0xh);
+        const _0xvc = {};
+        _0xh.forEach((_0xc, _0xi) => { _0xvc[_0xc.v] = _0xvc[_0xc.v] || []; _0xvc[_0xc.v].push(_0xi); });
+        let _0xhi = -1;
+        if (_0xev.rank === 0.5) {
+            const _0xpv = Object.keys(_0xvc).find(_0xv => _0xvc[_0xv].length === 2);
+            if (_0xpv) _0xhi = _0xvc[_0xpv][0];
+        } else if (_0xev.rank === 10) {
+            _0xhi = _0xh.findIndex(_0xc => _0xc.is7);
+        } else if (_0xev.rank === 6) {
+            const _0xfv = Object.keys(_0xvc).find(_0xv => _0xvc[_0xv].length === 4);
+            if (_0xfv) _0xhi = _0xvc[_0xfv][0];
         }
-        if (hideIdx === -1) { hideIdx = Math.floor(Math.random() * 5); }
-        this.revealedIdx[p] = [0, 1, 2, 3, 4].filter(i => i !== hideIdx);
+        if (_0xhi === -1) { _0xhi = Math.floor(Math.random() * 5); }
+        this.revealedIdx[_0xp] = [0, 1, 2, 3, 4].filter(_0xi => _0xi !== _0xhi);
     },
 
     aiProcessFold() {
-        this.players.slice(0, 3).forEach(p => {
-            if (this.isFolded[p]) return;
-            const myHand = this.hands[p];
-            const myEv = this.evaluate(myHand);
-            const hiddenCards = [];
-            this.players.forEach(pOther => {
-                this.hands[pOther].forEach((c, idx) => {
-                    if (!this.revealedIdx[pOther].includes(idx)) hiddenCards.push(c);
+        this.players.slice(0, 3).forEach(_0xp => {
+            if (this.isFolded[_0xp]) return;
+            const _0xmh = this.hands[_0xp];
+            const _0xme = this.evaluate(_0xmh);
+            const _0xhc = [];
+            this.players.forEach(_0xpo => {
+                this.hands[_0xpo].forEach((_0xc, _0xidx) => {
+                    if (!this.revealedIdx[_0xpo].includes(_0xidx)) _0xhc.push(_0xc);
                 });
             });
-            this.deckLeft.forEach(c => hiddenCards.push(c));
-            let scenarios = [];
-            const generateScenarios = (pool, count, current = []) => {
-                if (current.length === count) { scenarios.push([...current]); return; }
-                for (let i = 0; i < pool.length; i++) {
-                    let nextPool = [...pool];
-                    let pick = nextPool.splice(i, 1)[0];
-                    generateScenarios(nextPool, count, [...current, pick]);
-                    if (scenarios.length >= 24) return;
+            this.deckLeft.forEach(_0xc => _0xhc.push(_0xc));
+            let _0xscen = [];
+            const _0xgs = (_0xpool, _0xcount, _0xcurr = []) => {
+                if (_0xcurr.length === _0xcount) { _0xscen.push([..._0xcurr]); return; }
+                for (let _0xi = 0; _0xi < _0xpool.length; _0xi++) {
+                    let _0xnp = [..._0xpool];
+                    let _0xpk = _0xnp.splice(_0xi, 1)[0];
+                    _0xgs(_0xnp, _0xcount, [..._0xcurr, _0xpk]);
+                    if (_0xscen.length >= 24) return;
                 }
             };
-            generateScenarios(hiddenCards, 4);
-            let winCount = 0, highRankCount = 0, opponentFixedHighRank = false;
-            this.players.forEach(pOther => {
-                if (pOther === p) return;
-                const revealed = this.revealedIdx[pOther].map(idx => this.hands[pOther][idx]);
-                const evFixed = this.evaluate(revealed);
-                if (evFixed.rank >= 1) opponentFixedHighRank = true;
+            _0xgs(_0xhc, 4);
+            let _0xwc = 0, _0xhrc = 0, _0xofhr = false;
+            this.players.forEach(_0xpo => {
+                if (_0xpo === _0xp) return;
+                const _0xrev = this.revealedIdx[_0xpo].map(_0xidx => this.hands[_0xpo][_0xidx]);
+                const _0xef = this.evaluate(_0xrev);
+                if (_0xef.rank >= 1) _0xofhr = true;
             });
-            scenarios.forEach(scenario => {
-                const othersFullHands = {};
-                let sIdx = 0;
-                this.players.forEach(pOther => {
-                    if (pOther === p) return;
-                    const fullHand = this.revealedIdx[pOther].map(idx => this.hands[pOther][idx]);
-                    fullHand.push(scenario[sIdx++]);
-                    othersFullHands[pOther] = this.evaluate(fullHand);
+            _0xscen.forEach(_0xsc => {
+                const _0xofh = {};
+                let _0xsi = 0;
+                this.players.forEach(_0xpo => {
+                    if (_0xpo === _0xp) return;
+                    const _0xfh = this.revealedIdx[_0xpo].map(_0xidx => this.hands[_0xpo][_0xidx]);
+                    _0xfh.push(_0xsc[_0xsi++]);
+                    _0xofh[_0xpo] = this.evaluate(_0xfh);
                 });
-                const allRes = [myEv, ...Object.values(othersFullHands)];
-                const pOtherKeys = Object.keys(othersFullHands);
-                let isIWin = true;
-                pOtherKeys.forEach(pk => {
-                    if (this.compare(myEv, othersFullHands[pk], allRes) < 0) isIWin = false;
-                    if (othersFullHands[pk].rank >= 1) highRankCount++;
+                const _0xar = [_0xme, ...Object.values(_0xofh)];
+                const _0xpk = Object.keys(_0xofh);
+                let _0xiw = true;
+                _0xpk.forEach(_0xk => {
+                    if (this.compare(_0xme, _0xofh[_0xk], _0xar) < 0) _0xiw = false;
+                    if (_0xofh[_0xk].rank >= 1) _0xhrc++;
                 });
-                if (isIWin) winCount++;
+                if (_0xiw) _0xwc++;
             });
-            let shouldStay = false;
-            if (myEv.rank === 10) {
-                if (opponentFixedHighRank) shouldStay = true;
-                else if (highRankCount >= 18) shouldStay = true;
-                else if (Math.random() < 0.5) shouldStay = true;
+            let _0xss = false;
+            if (_0xme.rank === 10) {
+                if (_0xofhr) _0xss = true;
+                else if (_0xhrc >= 18) _0xss = true;
+                else if (Math.random() < 0.5) _0xss = true;
             } else {
-                if (winCount >= 6) shouldStay = true;
+                if (_0xwc >= 6) _0xss = true;
             }
-            if (!shouldStay) this.fold(p, 1);
+            if (!_0xss) this.fold(_0xp, 1);
         });
     },
 
     toFoldPhase() {
         this.phase = 'fold'; this.revealedIdx.human = [...this.selected]; this.selected = [];
         document.getElementById('btn-reveal').disabled = true; document.getElementById('btn-fold').disabled = false; document.getElementById('btn-showdown').disabled = false;
-        document.getElementById('msg-box').innerText = TEXT_DATA ? TEXT_DATA.gameMsg.chooseAction : "";
+        document.getElementById('msg-box').innerText = _0x2a1b ? _0x2a1b.gameMsg.chooseAction : "";
         this.render(); this.showUnrevealed();
     },
 
     humanFold() { this.aiProcessFold(); this.fold('human', 1); this.executeShowdown(true); },
-    fold(p, score) { 
-        if (!this.isFolded[p]) { 
-            this.isFolded[p] = true; this.totalScores[p] += score; this.roundLogs[p][this.round-1] = score; 
-            const ev = this.evaluate(this.hands[p]); document.getElementById('fold-rank-'+p).innerText = `(${ev.name})`; 
-            const resEl = document.getElementById('res-'+p); resEl.className = 'p-result txt-fold'; resEl.innerText = "FOLD (+1)";
-        } 
+    fold(_0xp, _0xsc) {
+        if (!this.isFolded[_0xp]) {
+            this.isFolded[_0xp] = true; this.totalScores[_0xp] += _0xsc; this.roundLogs[_0xp][this.round-1] = _0xsc;
+            const _0xev = this.evaluate(this.hands[_0xp]); document.getElementById('fold-rank-'+_0xp).innerText = `(${_0xev.name})`;
+            const _0xre = document.getElementById('res-'+_0xp); _0xre.className = 'p-result txt-fold'; _0xre.innerText = "FOLD (+1)";
+        }
     },
 
     showUnrevealed() {
-        const el = document.getElementById('remaining-cards'); 
-        if (!el) return;
-        el.innerHTML = "";
-        if (this.phase === 'reveal' || this.phase === 'idle') { 
-            for (let i = 0; i < 4; i++) { const div = document.createElement('div'); div.className = "mini-card locked"; el.appendChild(div); } 
-            return; 
+        const _0xel = document.getElementById('remaining-cards');
+        if (!_0xel) return;
+        _0xel.innerHTML = "";
+        if (this.phase === 'reveal' || this.phase === 'idle') {
+            for (let _0xi = 0; _0xi < 4; _0xi++) { const _0xd = document.createElement('div'); _0xd.className = "mini-card locked"; _0xel.appendChild(_0xd); }
+            return;
         }
-        let unrevealed = []; 
-        if (this.phase === 'result') { unrevealed = [...this.deckLeft]; } 
-        else { 
-            unrevealed = [...this.deckLeft]; 
-            this.players.slice(0, 3).forEach(p => { 
-                this.hands[p].forEach((c, i) => { if(!this.revealedIdx[p].includes(i)) unrevealed.push(c); }); 
-            }); 
+        let _0xun = [];
+        if (this.phase === 'result') { _0xun = [...this.deckLeft]; }
+        else {
+            _0xun = [...this.deckLeft];
+            this.players.slice(0, 3).forEach(_0xp => {
+                this.hands[_0xp].forEach((_0xc, _0xi) => { if(!this.revealedIdx[_0xp].includes(_0xi)) _0xun.push(_0xc); });
+            });
         }
-        unrevealed.sort((a, b) => this.cardCmp(a, b)).forEach(c => {
-            const div = document.createElement('div'); 
-            div.className = `mini-card ${c.is7?'special':(c.s==='♥'||c.s==='♦'?'red':'black')}`;
-            div.innerHTML = `<div class="suit">${c.s==='N'?'★':c.s}</div><div class="val">${c.v}</div>`; 
-            el.appendChild(div);
+        _0xun.sort((_0xa, _0xb) => this.cardCmp(_0xa, _0xb)).forEach(_0xc => {
+            const _0xd = document.createElement('div');
+            _0xd.className = `mini-card ${_0xc.is7?'special':(_0xc.s==='♥'||_0xc.s==='♦'?'red':'black')}`;
+            _0xd.innerHTML = `<div class="suit">${_0xc.s==='N'?'★':_0xc.s}</div><div class="val">${_0xc.v}</div>`;
+            _0xel.appendChild(_0xd);
         });
     },
 
-    executeShowdown(isHumanFolded = false) {
-        this.phase = 'result'; if (!isHumanFolded) this.aiProcessFold(); 
+    executeShowdown(_0xhf = false) {
+        this.phase = 'result'; if (!_0xhf) this.aiProcessFold();
         document.getElementById('btn-fold').disabled = true; document.getElementById('btn-showdown').disabled = true;
-        const activePlayers = this.players.filter(p => !this.isFolded[p]);
-        if (activePlayers.length > 0) {
-            const results = {}; this.players.forEach(p => results[p] = this.evaluate(this.hands[p]));
-            const winners = this.judge(results, activePlayers);
-            this.players.forEach(p => { if(!this.isFolded[p]) { const resEl = document.getElementById('res-'+p); resEl.innerText = results[p].name; resEl.className = winners.includes(p) ? "p-result txt-win" : "p-result txt-lose"; } });
-            winners.forEach(w => { let s = activePlayers.length + 2 + (results[w].rank === 10 ? 1 : 0); this.totalScores[w] += s; this.roundLogs[w][this.round-1] = s; });
-            activePlayers.forEach(p => { if(!winners.includes(p)) this.roundLogs[p][this.round-1] = 0; });
+        const _0xap = this.players.filter(_0xp => !this.isFolded[_0xp]);
+        if (_0xap.length > 0) {
+            const _0xres = {}; this.players.forEach(_0xp => _0xres[_0xp] = this.evaluate(this.hands[_0xp]));
+            const _0xwns = this.judge(_0xres, _0xap);
+            this.players.forEach(_0xp => { if(!this.isFolded[_0xp]) { const _0xre = document.getElementById('res-'+_0xp); _0xre.innerText = _0xres[_0xp].name; _0xre.className = _0xwns.includes(_0xp) ? "p-result txt-win" : "p-result txt-lose"; } });
+            _0xwns.forEach(_0xw => { let _0xs = _0xap.length + 2 + (_0xres[_0xw].rank === 10 ? 1 : 0); this.totalScores[_0xw] += _0xs; this.roundLogs[_0xw][this.round-1] = _0xs; });
+            _0xap.forEach(_0xp => { if(!_0xwns.includes(_0xp)) this.roundLogs[_0xp][this.round-1] = 0; });
         }
         this.render(); this.updateUI(); this.showUnrevealed();
-        if (this.round >= 7) setTimeout(() => this.showFinalResult(), 2000); 
+        if (this.round >= 7) setTimeout(() => this.showFinalResult(), 2000);
         else { this.round++; document.getElementById('btn-deal').disabled = false; }
     },
 
-    showFinalResult() {
-        document.getElementById('game-over-overlay').style.display = 'flex';
+    showFinalResult() { document.getElementById('game-over-overlay').style.display = 'flex'; },
+
+    evaluate(_0xcds) {
+        let _0xv = {}, _0xh7 = false; let _0xsor = [..._0xcds].sort((_0xa, _0xb) => this.cardCmp(_0xa, _0xb));
+        _0xcds.forEach(_0xc => { _0xv[_0xc.v] = (_0xv[_0xc.v] || 0) + 1; if (_0xc.is7) _0xh7 = true; });
+        let _0xcts = Object.entries(_0xv).sort((_0xa,_0xb) => _0xb[1] - _0xa[1] || _0xVO[_0xb[0]] - _0xVO[_0xa[0]]);
+        let _0xr = { rank: 0, name: "HIGH CARD", score_arr: _0xsor.map(_0xc => _0xVO[_0xc.v]), is7: _0xh7, cards: _0xsor };
+        if (_0xcts[0][1] === 4) _0xr = { rank: 6, name: "FOUR CARD", score_arr: [_0xVO[_0xcts[0][0]]], is7: _0xh7, cards: _0xsor };
+        else if (Object.keys(_0xv).length === 5 && _0xcds.length === 5 && (_0xVO[_0xsor[0].v] - _0xVO[_0xsor[4].v] === 4) && !_0xh7) _0xr = { rank: 4, name: "STRAIGHT", score_arr: [_0xVO[_0xsor[0].v]], is7: _0xh7, cards: _0xsor };
+        else if (_0xcts[0][1] === 3 && _0xcts[1] && _0xcts[1][1] === 2) _0xr = { rank: 3, name: "FULL HOUSE", score_arr: [_0xVO[_0xcts[0][0]]], is7: _0xh7, cards: _0xsor };
+        else if (_0xcts[0][1] === 3) _0xr = { rank: 2, name: "TRIPLE", score_arr: [_0xVO[_0xcts[0][0]]], is7: _0xh7, cards: _0xsor };
+        else if (_0xcts[0][1] === 2 && _0xcts[1] && _0xcts[1][1] === 2) _0xr = { rank: 1, name: "TWO PAIR", score_arr: [_0xVO[_0xcts[0][0]], _0xVO[_0xcts[1][0]]], is7: _0xh7, cards: _0xsor };
+        else if (_0xcts[0][1] === 2) _0xr = { rank: 0.5, name: "ONE PAIR", score_arr: [_0xVO[_0xcts[0][0]]], is7: _0xh7, cards: _0xsor };
+        if (_0xr.rank === 0 && _0xh7) return { rank: 10, name: "7-HIGH", score_arr: _0xsor.map(_0xc => _0xVO[_0xc.v]), is7: true, cards: _0xsor };
+        return _0xr;
     },
 
-    evaluate(cards) {
-        let v = {}, has7 = false; let sorted = [...cards].sort((a, b) => this.cardCmp(a, b)); 
-        cards.forEach(c => { v[c.v] = (v[c.v] || 0) + 1; if (c.is7) has7 = true; });
-        let counts = Object.entries(v).sort((a,b) => b[1] - a[1] || VAL_ORDER[b[0]] - VAL_ORDER[a[0]]);
-        let res = { rank: 0, name: "HIGH CARD", score_arr: sorted.map(c => VAL_ORDER[c.v]), is7: has7, cards: sorted };
-        if (counts[0][1] === 4) res = { rank: 6, name: "FOUR CARD", score_arr: [VAL_ORDER[counts[0][0]]], is7: has7, cards: sorted };
-        else if (Object.keys(v).length === 5 && cards.length === 5 && (VAL_ORDER[sorted[0].v] - VAL_ORDER[sorted[4].v] === 4) && !has7) res = { rank: 4, name: "STRAIGHT", score_arr: [VAL_ORDER[sorted[0].v]], is7: has7, cards: sorted };
-        else if (counts[0][1] === 3 && counts[1] && counts[1][1] === 2) res = { rank: 3, name: "FULL HOUSE", score_arr: [VAL_ORDER[counts[0][0]]], is7: has7, cards: sorted };
-        else if (counts[0][1] === 3) res = { rank: 2, name: "TRIPLE", score_arr: [VAL_ORDER[counts[0][0]]], is7: has7, cards: sorted };
-        else if (counts[0][1] === 2 && counts[1] && counts[1][1] === 2) res = { rank: 1, name: "TWO PAIR", score_arr: [VAL_ORDER[counts[0][0]], VAL_ORDER[counts[1][0]]], is7: has7, cards: sorted };
-        else if (counts[0][1] === 2) res = { rank: 0.5, name: "ONE PAIR", score_arr: [VAL_ORDER[counts[0][0]]], is7: has7, cards: sorted };
-        if (res.rank === 0 && has7) return { rank: 10, name: "7-HIGH", score_arr: sorted.map(c => VAL_ORDER[c.v]), is7: true, cards: sorted };
-        return res;
-    },
-
-    judge(res, activeKeys) { 
-        const has7Hi = activeKeys.some(k => res[k].rank === 10);
-        const hasOnePair = activeKeys.some(k => res[k].rank === 0.5);
-        if (has7Hi && hasOnePair) {
-            const onePairKeys = activeKeys.filter(k => res[k].rank === 0.5);
-            let winner = onePairKeys[0];
-            for (let i = 1; i < onePairKeys.length; i++) { if (this.compareNormal(res[onePairKeys[i]], res[winner]) > 0) winner = onePairKeys[i]; }
-            return onePairKeys.filter(k => this.compareNormal(res[k], res[winner]) === 0);
+    judge(_0xres, _0xak) {
+        const _0xh7h = _0xak.some(_0xk => _0xres[_0xk].rank === 10);
+        const _0xh1p = _0xak.some(_0xk => _0xres[_0xk].rank === 0.5);
+        if (_0xh7h && _0xh1p) {
+            const _0x1pk = _0xak.filter(_0xk => _0xres[_0xk].rank === 0.5);
+            let _0xwin = _0x1pk[0];
+            for (let _0xi = 1; _0xi < _0x1pk.length; _0xi++) { if (this.compareNormal(_0xres[_0x1pk[_0xi]], _0xres[_0xwin]) > 0) _0xwin = _0x1pk[_0xi]; }
+            return _0x1pk.filter(_0xk => this.compareNormal(_0xres[_0xk], _0xres[_0xwin]) === 0);
         }
-        const winners = []; 
-        activeKeys.forEach(p => { 
-            let win = true; 
-            activeKeys.forEach(o => { if (p !== o && this.compare(res[p], res[o], activeKeys.map(k => res[k])) < 0) win = false; }); 
-            if (win) winners.push(p); 
-        }); 
-        return winners; 
+        const _0xwns = [];
+        _0xak.forEach(_0xp => {
+            let _0xw = true;
+            _0xak.forEach(_0xo => { if (_0xp !== _0xo && this.compare(_0xres[_0xp], _0xres[_0xo], _0xak.map(_0xk => _0xres[_0xk])) < 0) _0xw = false; });
+            if (_0xw) _0xwns.push(_0xp);
+        });
+        return _0xwns;
     },
 
-    compare(r1, r2, allResults) {
-        const has7HiOnField = allResults.some(r => r.rank === 10);
-        if (has7HiOnField) {
-            if (r1.rank === 10) {
-                if (r2.rank === 0.5) return -1;
-                if (r2.rank === 10) return 0;
+    compare(_0xr1, _0xr2, _0xar) {
+        const _0xh7f = _0xar.some(_0xr => _0xr.rank === 10);
+        if (_0xh7f) {
+            if (_0xr1.rank === 10) {
+                if (_0xr2.rank === 0.5) return -1;
+                if (_0xr2.rank === 10) return 0;
                 return 1;
             }
-            if (r1.rank === 0.5) return 1;
-            if (r1.rank >= 1 && r1.rank <= 6) {
-                if (r2.rank === 10) return -1;
-                return this.compareNormal(r1, r2);
+            if (_0xr1.rank === 0.5) return 1;
+            if (_0xr1.rank >= 1 && _0xr1.rank <= 6) {
+                if (_0xr2.rank === 10) return -1;
+                return this.compareNormal(_0xr1, _0xr2);
             }
         }
-        return this.compareNormal(r1, r2);
+        return this.compareNormal(_0xr1, _0xr2);
     },
 
-    compareNormal(r1, r2) { 
-        if (r1.rank > r2.rank) return 1; 
-        if (r1.rank < r2.rank) return -1; 
-        for (let i = 0; i < r1.score_arr.length; i++) { 
-            if (r1.score_arr[i] > r2.score_arr[i]) return 1; 
-            if (r1.score_arr[i] < r2.score_arr[i]) return -1; 
-        } 
-        const s1 = SUIT_ORDER[r1.cards[0].s], s2 = SUIT_ORDER[r2.cards[0].s];
-        if (s1 > s2) return 1; if (s1 < s2) return -1;
-        return 0; 
+    compareNormal(_0xr1, _0xr2) {
+        if (_0xr1.rank > _0xr2.rank) return 1;
+        if (_0xr1.rank < _0xr2.rank) return -1;
+        for (let _0xi = 0; _0xi < _0xr1.score_arr.length; _0xi++) {
+            if (_0xr1.score_arr[_0xi] > _0xr2.score_arr[_0xi]) return 1;
+            if (_0xr1.score_arr[_0xi] < _0xr2.score_arr[_0xi]) return -1;
+        }
+        const _0xs1 = _0xSO[_0xr1.cards[0].s], _0xs2 = _0xSO[_0xr2.cards[0].s];
+        if (_0xs1 > _0xs2) return 1; if (_0xs1 < _0xs2) return -1;
+        return 0;
     },
-    
+
     updateUI() {
         document.getElementById('round-info').innerText = `ROUND ${this.round} / 7`;
-        const container = document.getElementById('side-score');
-        if(!container) return;
-        const maxScore = Math.max(...Object.values(this.totalScores));
-        container.innerHTML = this.players.map(p => {
-            const logs = this.roundLogs[p].map(l => `<td>${l}</td>`).join("");
-            const myClass = (p === 'human') ? 'my-score' : '';
-            const scoreClass = (this.totalScores[p] === maxScore && maxScore > 0) ? 'total-winner' : 'total-normal';
-            return `<div class="score-player-unit ${myClass}"><div class="p-top-info"><span class="p-name-label">${p === 'human' ? 'YOU' : 'Bot ' + p.slice(-1)}</span><span class="p-total-label ${scoreClass}">${this.totalScores[p]}</span></div><table class="p-mini-table"><tr><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th><th>R7</th></tr><tr>${logs}</tr></table></div>`;
+        const _0xcon = document.getElementById('side-score');
+        if(!_0xcon) return;
+        const _0xms = Math.max(...Object.values(this.totalScores));
+        _0xcon.innerHTML = this.players.map(_0xp => {
+            const _0xlg = this.roundLogs[_0xp].map(_0xl => `<td>${_0xl}</td>`).join("");
+            const _0xmc = (_0xp === 'human') ? 'my-score' : '';
+            const _0xsc = (this.totalScores[_0xp] === _0xms && _0xms > 0) ? 'total-winner' : 'total-normal';
+            return `<div class="score-player-unit ${_0xmc}"><div class="p-top-info"><span class="p-name-label">${_0xp === 'human' ? 'YOU' : 'Bot ' + _0xp.slice(-1)}</span><span class="p-total-label ${_0xsc}">${this.totalScores[_0xp]}</span></div><table class="p-mini-table"><tr><th>R1</th><th>R2</th><th>R3</th><th>R4</th><th>R5</th><th>R6</th><th>R7</th></tr><tr>${_0xlg}</tr></table></div>`;
         }).join("");
     },
 
-    clearResults() { this.players.forEach(p => document.getElementById('res-'+p).innerText = ""); },
-    cardCmp(a, b) { if (VAL_ORDER[a.v] !== VAL_ORDER[b.v]) return VAL_ORDER[b.v] - VAL_ORDER[a.v]; return SUIT_ORDER[b.s] - SUIT_ORDER[a.s]; },
-    
-    toggleCardSelection(idx) {
-        const clickSfx = document.getElementById('sfx-click'); 
-        if(clickSfx) {
-            clickSfx.volume = this.sfxVol; clickSfx.play().catch(e => {});
-        }
-        const sIdx = this.selected.indexOf(idx); if (sIdx > -1) this.selected.splice(sIdx, 1); else if (this.selected.length < 4) this.selected.push(idx);
+    clearResults() { this.players.forEach(_0xp => document.getElementById('res-'+_0xp).innerText = ""); },
+    cardCmp(_0xa, _0xb) { if (_0xVO[_0xa.v] !== _0xVO[_0xb.v]) return _0xVO[_0xb.v] - _0xVO[_0xa.v]; return _0xSO[_0xb.s] - _0xSO[_0xa.s]; },
+
+    toggleCardSelection(_0xidx) {
+        const _0xcs = document.getElementById('sfx-click');
+        if(_0xcs) { _0xcs.volume = this.sfxVol; _0xcs.play().catch(_0xe => {}); }
+        const _0xsi = this.selected.indexOf(_0xidx); if (_0xsi > -1) this.selected.splice(_0xsi, 1); else if (this.selected.length < 4) this.selected.push(_0xidx);
         document.getElementById('btn-reveal').disabled = (this.selected.length !== 4);
         this.render();
     },
 
-    render(withAnim = false) {
-        this.players.forEach(pKey => {
-            const isAI = pKey.startsWith('ai'); const el = document.getElementById('cards-' + pKey); el.innerHTML = "";
-            let indices = [0,1,2,3,4];
+    render(_0xwa = false) {
+        this.players.forEach(_0xpk => {
+            const _0xisA = _0xpk.startsWith('ai'); const _0xel = document.getElementById('cards-' + _0xpk); _0xel.innerHTML = "";
+            let _0xind = [0,1,2,3,4];
             if (this.phase !== 'reveal') {
-                indices.sort((a, b) => {
-                    const aRev = this.revealedIdx[pKey].includes(a);
-                    const bRev = this.revealedIdx[pKey].includes(b);
-                    if (aRev !== bRev) return bRev - aRev;
-                    return this.cardCmp(this.hands[pKey][a], this.hands[pKey][b]);
+                _0xind.sort((_0xa, _0xb) => {
+                    const _0xar = this.revealedIdx[_0xpk].includes(_0xa);
+                    const _0xbr = this.revealedIdx[_0xpk].includes(_0xb);
+                    if (_0xar !== _0xbr) return _0xbr - _0xar;
+                    return this.cardCmp(this.hands[_0xpk][_0xa], this.hands[_0xpk][_0xb]);
                 });
             }
-            indices.forEach((origIdx, vIdx) => {
-                const c = this.hands[pKey][origIdx]; 
-                const div = document.createElement('div'); 
-                div.className = `card ${(c.s==='♥'||c.s==='♦'?'red':'black')}`;
-                if (this.isFolded[pKey]) div.classList.add('folded-filter');
-                if (withAnim && pKey === 'human') { div.classList.add('human-deal-anim'); div.style.animationDelay = `${vIdx * 0.52}s`; }
-                let isVisible = !isAI || (this.phase === 'fold' && this.revealedIdx[pKey].includes(origIdx)) || this.phase === 'result';
-                if (!isVisible) div.classList.add('hidden'); 
-                else { 
-                    if (c.is7) div.classList.add('special'); 
-                    div.innerHTML = `<div class="suit">${c.s==='N'?'★':c.s}</div><div class="val">${c.v}</div>`; 
+            _0xind.forEach((_0xoid, _0xvid) => {
+                const _0xc = this.hands[_0xpk][_0xoid];
+                const _0xdiv = document.createElement('div');
+                _0xdiv.className = `card ${(_0xc.s==='♥'||_0xc.s==='♦'?'red':'black')}`;
+                if (this.isFolded[_0xpk]) _0xdiv.classList.add('folded-filter');
+                if (_0xwa && _0xpk === 'human') { _0xdiv.classList.add('human-deal-anim'); _0xdiv.style.animationDelay = `${_0xvid * 0.52}s`; }
+                let _0xisV = !_0xisA || (this.phase === 'fold' && this.revealedIdx[_0xpk].includes(_0xoid)) || this.phase === 'result';
+                if (!_0xisV) _0xdiv.classList.add('hidden');
+                else {
+                    if (_0xc.is7) _0xdiv.classList.add('special');
+                    _0xdiv.innerHTML = `<div class="suit">${_0xc.s==='N'?'★':_0xc.s}</div><div class="val">${_0xc.v}</div>`;
                 }
                 if (this.phase !== 'reveal') {
-                    if (this.revealedIdx[pKey].includes(origIdx)) div.classList.add('revealed-border');
-                    if (vIdx === 4) div.classList.add('push-right');
+                    if (this.revealedIdx[_0xpk].includes(_0xoid)) _0xdiv.classList.add('revealed-border');
+                    if (_0xvid === 4) _0xdiv.classList.add('push-right');
                 }
-                if (!isAI && this.phase === 'reveal') {
-                    if (this.selected.includes(origIdx)) div.classList.add('selected');
-                    div.onclick = () => this.toggleCardSelection(origIdx);
+                if (!_0xisA && this.phase === 'reveal') {
+                    if (this.selected.includes(_0xoid)) _0xdiv.classList.add('selected');
+                    _0xdiv.onclick = () => this.toggleCardSelection(_0xoid);
                 }
-                el.appendChild(div);
+                _0xel.appendChild(_0xdiv);
             });
         });
     }
