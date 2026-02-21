@@ -10,7 +10,6 @@
     function requestFullScreenIfMobile() {
         const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
         if (!isMobile) return;
-
         const docEl = document.documentElement;
         if (docEl.requestFullscreen) docEl.requestFullscreen();
         else if (docEl.webkitRequestFullscreen) docEl.webkitRequestFullscreen();
@@ -90,7 +89,7 @@
         },
         ev(c){
             let v={},h7=false,sd=[...c].sort((a,b)=>this.cC(a,b));c.forEach(x=>{v[x.v]=(v[x.v]||0)+1;if(x.is7)h7=true;});let ct=Object.entries(v).sort((a,b)=>b[1]-a[1]||_0x12e3[b[0]]-_0x12e3[a[0]]);let r={rank:0,name:"HIGH CARD",s_a:sd.map(x=>_0x12e3[x.v]),h7,cards:sd};
-            if(ct[0][1]===4)r={rank:6,name:"FOUR CARD",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};else if(Object.keys(v).length===5&&c.length===5&&(_0x12e3[sd[0].v]-_0x12e3[sd[4].v]===4)&&!h7)r={rank:4,name:"STRAIGHT",s_a:[_0x12e3[sd[0].v]],h7,cards:sd};else if(ct[0][1]===3&&ct[1]&&ct[1][1]===2)r={rank:3,name:"FULL HOUSE",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};else if(ct[0][1]===3)r={rank:2,name:"TRIPLE",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};else if(ct[0][1]===2&&ct[1]&&ct[1][1]===2)r={rank:1,name:"TWO PAIR",s_a:[_0x12e3[ct[0][0]],_0x12e3[ct[1][0]]],h7,cards:sd};else if(ct[0][1]===2)r={rank:0.5,name:"ONE PAIR",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};
+            if(ct[0][1]===4)r={rank:6,name:"FOUR CARD",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};else if(ct[0][1]===3&&ct[1]&&ct[1][1]===2)r={rank:4,name:"FULL HOUSE",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};else if(Object.keys(v).length===5&&c.length===5&&(_0x12e3[sd[0].v]-_0x12e3[sd[4].v]===4)&&!h7)r={rank:3,name:"STRAIGHT",s_a:[_0x12e3[sd[0].v]],h7,cards:sd};else if(ct[0][1]===3)r={rank:2,name:"TRIPLE",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};else if(ct[0][1]===2&&ct[1]&&ct[1][1]===2)r={rank:1,name:"TWO PAIR",s_a:[_0x12e3[ct[0][0]],_0x12e3[ct[1][0]]],h7,cards:sd};else if(ct[0][1]===2)r={rank:0.5,name:"ONE PAIR",s_a:[_0x12e3[ct[0][0]]],h7,cards:sd};
             if(r.rank===0&&h7&&c.length===5)return {rank:10,name:"7-HIGH",s_a:sd.map(x=>_0x12e3[x.v]),h7:true,cards:sd};return r;
         },
         jd(r,ak){
