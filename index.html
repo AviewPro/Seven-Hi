@@ -10,34 +10,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="idle">
-
     <div id="main-screen">
         <div class="main-btn-group">
             <button id="btn-start" class="btn-main" onclick="_0x4a1b(); _0x7f2e.startGame()">START</button>
             <button id="btn-tutorial" class="btn-main" onclick="_0x4a1b(); _0x1b2c()">TUTORIAL</button>
         </div>
     </div>
-
     <div id="tutorial-overlay">
         <div class="tutorial-msg-box">
-            <h3 id="tut-title"></h3>
-            <div id="tut-content-area"><p id="tut-desc"></p></div>
-            <button id="tut-next-btn" onclick="_0x9d8e()">확인</button>
-            <div id="tut-esc-guide">모바일에서는 화면을 터치하여 진행하세요.</div>
+            <h3 id="tut-title" style="color: #ccc; font-size: 2.8vh; margin-bottom: 1.5vh;"></h3>
+            <div id="tut-content-area"><p id="tut-desc" style="font-size: 2vh; color: #ddd; line-height: 1.6; margin-bottom: 2vh;"></p></div>
+            <button id="tut-next-btn" onclick="_0x9d8e()" style="background: #444; color: #fff; padding: 1vh 4vh; border: 0.1vh solid #666; border-radius: 1vh; font-size: 1.8vh; font-weight: bold; cursor: pointer;">확인</button>
+            <div id="tut-esc-guide" style="font-size: 1.4vh; color: #888; margin-top: 2vh;">ESC를 누르면 언제든지 메인화면으로 돌아갑니다.</div>
         </div>
     </div>
-
     <div id="game-over-overlay">
         <div class="final-board">
             <div id="final-winner-text" class="final-winner">WINNER: YOU</div>
             <div id="final-score-container"></div>
-            <div class="final-btn-row">
-                <button onclick="location.reload()" class="btn-final-menu">Main Menu</button>
-                <button id="btn-restart" onclick="_0x4a1b(); _0x7f2e.resetForNewGame()" class="btn-final-restart">Restart</button>
+            <div style="display: flex; gap: 3vh; justify-content: center; margin-top: 4vh;">
+                <button onclick="location.reload()" style="background:#444; color:#fff; width: 25vh; height: 7vh; font-size: 2.5vh; font-weight: bold; border-radius: 2vh; cursor: pointer; border: 0.3vh solid #666; display: flex; align-items: center; justify-content: center;">Main Menu</button>
+                <button id="btn-restart" onclick="_0x4a1b(); _0x7f2e.resetForNewGame()" style="background:var(--gold-gradient); color:#000; width: 25vh; height: 7vh; font-size: 2.5vh; font-weight: bold; border-radius: 2vh; cursor: pointer; border: none; display: flex; align-items: center; justify-content: center;">Restart</button>
             </div>
         </div>
     </div>
-
     <div id="sound-controls">
         <div id="sound-panel">
             <div class="sound-row"><label>BGM</label><input type="range" min="0" max="1" step="0.01" value="0.06" id="vol-bgm" oninput="_0x8c9d('bgm', this.value)"></div>
@@ -45,19 +41,16 @@
         </div>
         <button id="btn-sound-toggle" onclick="_0x2b3c()">⚙️</button>
     </div>
-
     <audio id="bgm" src="casinojazz.mp3" loop preload="auto"></audio>
     <audio id="sfx-click" src="delt1.mp3" preload="auto"></audio>
     <audio id="sfx-btn" src="Click.mp3" preload="auto"></audio>
     <audio id="sfx-delt4" src="delt4.mp3" preload="auto"></audio>
-
     <div id="side-container">
-        <div class="score-title">SCORE</div>
+        <div class="score-title">SCORE BOARD</div>
         <div id="side-score"></div>
     </div>
-
     <div class="game-board">
-        <div class="static-gold-box">SEVEN Hi</div>
+        <div class="static-gold-box">WELCOME TO SEVEN Hi</div>
         <div id="round-info">ROUND 1 / 7</div>
         <div class="player-zone" id="zone-ai1"><div class="p-meta"><div class="p-result" id="res-ai1"></div><div id="fold-rank-ai1" class="p-fold-rank"></div></div><div id="cards-ai1" class="cards-row"></div></div>
         <div class="player-zone" id="zone-ai2"><div class="p-meta"><div class="p-result" id="res-ai2"></div><div id="fold-rank-ai2" class="p-fold-rank"></div></div><div id="cards-ai2" class="cards-row"></div></div>
@@ -68,16 +61,15 @@
             <div class="action-btn-group">
                 <button id="btn-deal" onclick="_0x4a1b(); _0x7f2e.handleBtnClick('deal')">DEAL</button>
                 <button id="btn-reveal" onclick="_0x7f2e.handleBtnClick('reveal')" disabled>REVEAL</button>
-                <button id="btn-fold" class="fold-btn" onclick="_0x7f2e.handleBtnClick('fold')" disabled>FOLD</button>
+                <button id="btn-fold" class="fold-btn" onclick="_0x7f2e.handleBtnClick('fold')" disabled>FOLD (+1)</button>
                 <button id="btn-showdown" onclick="_0x7f2e.handleBtnClick('showdown')" disabled>SHOWDOWN</button>
             </div>
         </div>
     </div>
-
     <div id="deck-info">
+        <div class="guide-h" style="font-size:1.4vh; font-weight:bold; color:#ffd700;">UNREVEALED</div>
         <div id="remaining-cards" class="remaining-container"></div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
